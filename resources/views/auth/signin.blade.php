@@ -29,11 +29,14 @@
                             
                             <div class="form-wrapper row">
                                 <label for="">Tên đăng nhập  <span class="request_star">*</span></label>
-                                <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" autofocus placeholder="Tên đăng nhập ...">
+                                <input  id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" autofocus placeholder="Tên đăng nhập ...">
+                                @if(isset($data['username'])) <span style="color: red">{{$data['username']}}</span> @endif
                             </div>
                             <div class="form-wrapper row {{!isset($data['password']) ? 'mb-3' : ''}}">
                                 <label for="">Mật khẩu <span class="request_star">*</span></label>
                                 <input id="password" type="password" class="form-control" name="password" placeholder="Mật khẩu">
+                                @if(isset($data['password'])) <span style="color: red">{{$data['password']}}</span> @endif
+                                @if(isset($data['false'])) <span style="color: red">{{$data['false']}}</span> @endif
                             </div>
                             <div class="row mb-0">
                                 <div class="col-md-12 mb-3" style="display: flex;justify-content: space-between;">

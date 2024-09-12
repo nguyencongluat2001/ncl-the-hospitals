@@ -13,6 +13,7 @@ use Modules\System\Dashboard\PermissionLogin\Services\PermissionLoginService;
 use Modules\System\Dashboard\PermissionLogin\Models\PermissionLoginModel;
 use Str;
 use Modules\Base\Library;
+use Illuminate\Support\Facades\Http;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,6 @@ class LoginController extends Controller
         $this->permissionLoginService = $permissionLoginService;
         $this->userInfoService = $userInfoService;
         $this->userService = $userService;
-        // parent::__construct();
     }
     public function checkLogin(Request $request)
     {
@@ -39,20 +39,55 @@ class LoginController extends Controller
             $data['password'] = "Mật khẩu không được để trống";
             return view('auth.signin',compact('data'));
         }
-        // if (!$getUsers) {
-        //     $message = "Sai tên đăng nhập!";
-        //     return redirect('/');
-        // }
-        return view('client.home.home');
+        
+        $param = [
+            'username'=> $request->username,
+            'password'=> $request->password
+        ];
+        $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/login');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        if($response['status'] == true){
+            $getkhoaphong = $this->getkhoaphong($response['loginModel']['matram']);
+            $gettrangthai = $this->gettrangthai();
 
-        if($password == '123'){
-            $_SESSION["username"]   = $username;
-            $_SESSION["password"]   = $password;
+            $_SESSION["username"] = $request->username;
+            $_SESSION["matram"] = $response['loginModel']['matram'];
+            $_SESSION["idnhanvien"] = $response['loginModel']['idnhanvien'];
+            $_SESSION["khoaphong"] = $getkhoaphong;
+            $_SESSION["trangthai"] = $gettrangthai;
+
+            return view('client.home.home');
+        }else{
+            $data['false'] = "Thông tin đăng nhập không chính xác!";
+            return view('auth.signin',compact('data'));
         }
+    }
+    public function getkhoaphong ($matram)
+    {
+        $matram = 'matram='.$matram;
+        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getkhoaphong?'.$matram.'');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $khoaphong = [];
+        if($response['status'] == true){
+            $khoaphong = $response['result'];
+        }
+        return $khoaphong;
+    }
+    public function gettrangthai ()
+    {
+        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/gettrangthai');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $trangthai = [];
+        if($response['status'] == true){
+            $trangthai = $response['result'];
+        }
+        return $trangthai;
     }
     public function logout (Request $request)
     {
-        // session_unset();
         Auth::logout();
         if(!empty($_SESSION['role'])){
             session_destroy();
@@ -65,13 +100,4 @@ class LoginController extends Controller
     {
         return view('auth.signin');
     }
-    // check quyền hiển thị menu
-    private function checkPermision($menu,$role){
-        foreach ($menu as $key => $value) {
-            if ($key == $role) {
-                $menu = $value;
-                return  $menu;
-            }
-        }
-   }
 }

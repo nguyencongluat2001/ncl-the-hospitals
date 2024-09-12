@@ -49,7 +49,31 @@ class HomeController extends Controller
     {
         $dataSearch = '';
         $datas['dataSearch'] = '';
-        dd(123);
         return view('client.home.home',$datas);
+    }
+    /**
+     * Danh sách
+     */
+    public function loadList(Request $request)
+    {
+        $input = $request->input();
+        $param = [
+            "pid" => "",
+            "tenbn" => "",
+            "matram" => "",
+            "tungay" => "09-09-2024",
+            "denngay" => "11-09-2024",
+            "idkhoathuchien" => "-1",
+            "matram" => "XQ,MRI",
+            "idnhanvien" =>"-1"
+        ];
+        $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/searchchidinh');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $data = [];
+        if($response['status'] == true){
+            $data['datas'] = $response['result'];
+        }
+        return view('client.home.loadlist', $data)->render();
     }
 }
