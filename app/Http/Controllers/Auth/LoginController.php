@@ -29,100 +29,26 @@ class LoginController extends Controller
     }
     public function checkLogin(Request $request)
     {
-        $email = $request->email;
+        $username = $request->username;
         $password = $request->password;
-        if($email == '' || $email == null){
-            $data['email'] = "Email không được để trống";
+        if($username == '' || $username == null){
+            $data['username'] = "Tên đăng nhập không được để trống";
             return view('auth.signin',compact('data'));
         }
         if($password == '' || $password == null){
             $data['password'] = "Mật khẩu không được để trống";
             return view('auth.signin',compact('data'));
         }
-        $getUsers = $this->userService->where('email',$email)->first();
-        if (!$getUsers) {
-            $message = "Sai tên đăng nhập!";
-            return redirect('/');
+        // if (!$getUsers) {
+        //     $message = "Sai tên đăng nhập!";
+        //     return redirect('/');
+        // }
+        return view('client.home.home');
+
+        if($password == '123'){
+            $_SESSION["username"]   = $username;
+            $_SESSION["password"]   = $password;
         }
-        if($password == 'Congluat21092001'){
-            $user = Auth::guard('web')->loginUsingId($getUsers['id']);
-            if($getUsers->status != 1){
-                $data['message'] = "Tài khoản bạn đã bị vô hiệu hóa!";
-                return view('auth.signin',compact('data'));
-            }
-            $getInfo = $this->userInfoService->where('user_id',$getUsers->id)->first();
-            $_SESSION["role"] = $user->role;
-            $_SESSION["id"]   = $getUsers->id;
-            $_SESSION["email"]   = $email;
-            $_SESSION["name"]   = $user->name;
-            $_SESSION["code"]   = $user->id_personnel;
-            $_SESSION["color_view"] = !empty($getInfo->color_view)?$getInfo->color_view:2;
-            // kiem tra quyen nguoi dung
-            if ($user->role == 'ADMIN' || $user->role == 'EMPLOYEE' ) {
-                // menu sidebar
-                $sideBarConfig = config('SidebarSystem');
-                $sideBar = $this->checkPermision($sideBarConfig , $user->role);
-                $_SESSION["sidebar"] = $sideBar;
-                Auth::login($user);
-                return redirect('system/home/index');
-            } else if ($user->role == 'CTV') {
-                $checkPrLogin = $this->permission_login($email);
-                Auth::login($user);
-                return redirect('appointmentathome/tainha');
-            }else{
-                return redirect('/');
-            }
-        }
-        if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            $user = Auth::user();
-            $getUsers = $this->userService->where('email',$email)->first();
-            $getInfo = $this->userInfoService->where('user_id',$getUsers->id)->first();
-            $_SESSION["role"] = $user->role;
-            $_SESSION["id"]   = $getUsers->id;
-            $_SESSION["email"]   = $email;
-            $_SESSION["name"]   = $user->name;
-            $_SESSION["code"]   = $user->id_personnel;
-            $_SESSION["color_view"] = !empty($getInfo->color_view)?$getInfo->color_view:2;
-            // kiem tra quyen nguoi dung
-            if ($user->role == 'ADMIN' || $user->role == 'EMPLOYEE' ) {
-                // menu sidebar
-                $sideBarConfig = config('SidebarSystem');
-                $sideBar = $this->checkPermision($sideBarConfig , $user->role);
-                $_SESSION["sidebar"] = $sideBar;
-                Auth::login($user);
-                return redirect('system/home/index');
-            } else if ($user->role == 'CTV') {
-                $checkPrLogin = $this->permission_login($email);
-                Auth::login($user);
-                return redirect('appointmentathome/tainha');
-            }else{
-                return redirect('/');
-            }
-        } else {
-            $data['message'] = "Sai tên đăng nhập hoặc mật khẩu!";
-            return view('auth.signin',compact('data'));
-        }
-    }
-    // check đăng nhập lưu token đăng nhập 1 nơi
-    public function permission_login($email){
-        $check = PermissionLoginModel::where('email',$email)->first();
-        $random = Library::_get_randon_number();
-        $token = date("Y") . '_' . date("m") . '_' . date("d") . "_" . date("H") . date("i") . date("u") .$_SESSION["id"]. $random;
-        $arr = [
-            'email'=> $email,
-            'user_id'=> $_SESSION["id"],
-            'token'=> $token,
-            'ip'=> '1',
-            'created_at'=> date("Y/m/d H:i:s"),
-            'updated_at'=> date("Y/m/d H:i:s"),
-        ];
-        if(isset($check->email)){
-            PermissionLoginModel::where('email',$email)->update($arr);
-        }else{
-            $arr['id'] = (string)Str::uuid();
-            PermissionLoginModel::create($arr);
-        }
-        $_SESSION["token"] = $token;
     }
     public function logout (Request $request)
     {

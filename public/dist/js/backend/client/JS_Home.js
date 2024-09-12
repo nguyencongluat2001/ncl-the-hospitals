@@ -24,6 +24,7 @@ JS_Home.prototype.alerMesage = function(nameMessage,icon,color){
  * @return void
  */
 JS_Home.prototype.loadIndex = function () {
+    console.log(123)
     var myClass = this;
     var oForm = 'form#frmLoadlist_list_tap1';
     var oFormBlog = 'form#frmLoadlist_blog';
