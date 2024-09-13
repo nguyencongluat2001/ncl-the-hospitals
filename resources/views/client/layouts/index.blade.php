@@ -149,16 +149,6 @@
     </div>
     @include('client.layouts.menu')
     @yield('body-client')
-    <!-- zalo chat -->
-    <!-- <div class="zalo-chat-widget" data-oaid="1299585831202016907" data-welcome-message="Rất vui khi được hỗ trợ bạn!" data-autopopup="0" data-width="300" data-height="300"> </div> 
-    <script src="https://sp.zalo.me/plugins/sdk.js"> </script>  -->
-    <!-- Start Footer -->
-    @include('client.layouts.chatZalo')
-
-    @include('client.layouts.footer')
-    <!-- End Footer -->
-    <!-- Bootstrap -->
-    <script src="../clients/js/bootstrap.bundle.min.js"></script>
     <!-- Load jQuery require for isotope -->
     <script src="../clients/js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/placeholderTypewriter.js') }}"></script>

@@ -45,7 +45,7 @@ Route::get('mapReport',  [MapController::class,'mapReport']);
 Route::get('/system/home', [LoginController::class, 'checkLogin'])->name('checkLogin');
 Route::post('/login/checkLogin_client', [LoginController::class, 'checkLogin_client']);
 Route::get('/system/login', [LoginController::class, 'logout'])->name('fromLogin');
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 Route::post('register/send-otp/sent_OTP', [UserController::class, 'sent_OTP']);
 Route::get('/home', [App\Http\Controllers\ClientHomeController::class, 'index'])->name('home');
 Route::get('/', [ClientHomeController::class, 'index']);

@@ -12,11 +12,12 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box; } */
 
-/* body {
+body {
   font-family: "Muli-Regular";
   color: #666;
   font-size: 13px;
-  margin: 0; } */
+  line-height: 0.5 !important;
+}
 
 input, textarea, select, button {
   font-family: "Muli-Regular";
