@@ -89,6 +89,7 @@ Route::prefix('/client')->group(function () {
     Route::prefix('home')->group(function(){
         Route::get('/index', [ClientHomeController::class, 'index']);
         Route::get('/loadList',[ClientHomeController::class,'loadList']);
+        Route::post('/createForm', [ClientHomeController::class,'createForm']);
     });
 });
 // Route::get('/index', [UserController::class, 'index']);

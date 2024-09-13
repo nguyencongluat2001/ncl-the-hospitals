@@ -24,22 +24,20 @@ JS_Home.prototype.alerMesage = function(nameMessage,icon,color){
  * @return void
  */
 JS_Home.prototype.loadIndex = function () {
-    console.log(123)
     var myClass = this;
     var oForm = 'form#frmHome_index';
     NclLib.menuActive('.link-home');
     myClass.loadList(oForm);
-    
-    $('form#frmAdd').find('#btn_create').click(function () {
-        myClass.store('form#frmAdd');
-    })
     $("#myInput").click(function(){
         $("#overSearch").toggleClass('closed');
+    });
+    $('form#frmHome_index').find('#btn_update').click(function () {
+        myClass.edit(oForm);
     });
 }
 JS_Home.prototype.loadevent = function (oForm) {
     var myClass = this;
-    $('form#frmAdd').find('#btn_create').click(function () {
+    $('form#frmHome_index').find('#btn_update').click(function () {
         myClass.store('form#frmAdd');
     })
 }
@@ -104,6 +102,48 @@ JS_Home.prototype.loadList = function (oForm, numberPage = 1, perPage = 15) {
             $(oForm).find('#cbo_nuber_record_page').val(perPage);
             var loadding = NclLib.successLoadding();
             myClass.loadevent(oForm);
+        }
+    });
+}
+/**
+ * Hàm hiển thị modal edit
+ *
+ * @param oForm (tên form)
+ *
+ * @return void
+ */
+JS_Home.prototype.edit = function (edit) {
+    var url = this.urlPath + '/createForm';
+    var myClass = this;
+    var data = '_token=' + $('#frmHome_index #_token').val();
+    var listitem = '';
+    var p_chk_obj = $('#table-data').find('input[name="chk_item_id"]');
+    $(p_chk_obj).each(function () {
+        if ($(this).is(':checked')) {
+            if (listitem !== '') {
+                listitem += ',' + $(this).val();
+            } else {
+                listitem = $(this).val();
+            }
+        }
+    });
+    if (listitem == '') {
+        var nameMessage = 'Bạn chưa chọn bản ghi!';
+        NclLib.alertMessageBackend('warning', 'Cảnh báo', nameMessage);
+        return false;
+    }
+    data += '&id=' + listitem;
+    console.log(data);
+    $.ajax({
+        url: url,
+        type: "POST",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            $('#editmodal').html(arrResult);
+            // $('.chzn-select').chosen({ height: '100%', width: '100%' });
+            $('#editmodal').modal('show');
+            myClass.loadevent('form#frmAdd');
         }
     });
 }

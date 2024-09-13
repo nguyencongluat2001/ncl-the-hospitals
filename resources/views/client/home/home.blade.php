@@ -106,7 +106,7 @@
                                  </div>
                             </div>
                             <div class="breadcrumb-input-right pt-2">
-                                        <button style="font-size: 10px;" class="btn btn-success shadow-sm" id="btn_add" type="button"data-toggle="tooltip"
+                                        <button style="font-size: 10px;" class="btn btn-success shadow-sm" id="btn_update" type="button"data-toggle="tooltip"
                                             data-original-title="Thêm thể loại"><i style="color:#ffffff" class="fas fa-plus"></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Nhập kết quả</span>
                                         <button style="font-size: 10px;background: #ffc2c2;" class="btn btn-danger shadow-sm" id="btn_delete" type="button"data-toggle="tooltip"
                                             data-original-title="Xóa thể loại"><i class="fas fa-trash-alt"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Hủy kết quả</span>
@@ -125,11 +125,11 @@
             </form>
         </div>
     </div>
-    <div class="modal fade" id="editmodalCategory" role="dialog"></div>
+    <div class="modal fade" id="editmodal" role="dialog"></div>
     <div class="modal " id="addfile" role="dialog"></div>
-
     <div id="dialogconfirm"></div>
-<script src='../assets/js/jquery.js'></script>
+
+<!-- <script src='../assets/js/jquery.js'></script> -->
 <script type="text/javascript" src="{{ URL::asset('dist/js/backend/client/JS_Home.js') }}"></script>
 <script type="text/javascript">
     var baseUrl = "{{ url('') }}";

@@ -76,4 +76,17 @@ class HomeController extends Controller
         }
         return view('client.home.loadlist', $data)->render();
     }
+       /**
+     * Load màn hình them thông tin người dùng
+     *
+     * @param Request $request
+     *
+     * @return view
+     */
+    public function createForm(Request $request)
+    {
+        $input = $request->all();
+        $data['id'] = $input['id'];
+        return view('client.home.changeEdit',$data);
+    }
 }

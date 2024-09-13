@@ -8,7 +8,7 @@ div.scrollmenu a {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px;
+  padding: 5px;
   text-decoration: none;
 }
 
@@ -74,6 +74,10 @@ div.scrollmenu a:hover {
     /* opacity: 0.2; */
     border-color: rgba(0, 0, 0, 0.2);
   }
+  .table-responsive {
+    position: relative;
+    padding: 0px !important;
+}
 </style>
 <span>Thông tin danh sách bệnh nhân</span>
 <div id="style-1" style="padding-right:10px;">
