@@ -34,6 +34,9 @@ JS_Home.prototype.loadIndex = function () {
     $('form#frmHome_index').find('#btn_update').click(function () {
         myClass.edit(oForm);
     });
+    $('form#frmAdd').find('#btn_create').click(function () {
+        myClass.store('form#frmAdd');
+    })
 }
 JS_Home.prototype.loadevent = function (oForm) {
     var myClass = this;
@@ -112,7 +115,7 @@ JS_Home.prototype.loadList = function (oForm, numberPage = 1, perPage = 15) {
  *
  * @return void
  */
-JS_Home.prototype.edit = function (edit) {
+JS_Home.prototype.edit = function () {
     var url = this.urlPath + '/createForm';
     var myClass = this;
     var data = '_token=' + $('#frmHome_index #_token').val();
@@ -144,6 +147,38 @@ JS_Home.prototype.edit = function (edit) {
             // $('.chzn-select').chosen({ height: '100%', width: '100%' });
             $('#editmodal').modal('show');
             myClass.loadevent('form#frmAdd');
+        }
+    });
+}
+JS_Home.prototype.store = function (oFormCreate) {
+    var url = this.urlPath + '/create';
+    var myClass = this;
+    var data = $(oFormCreate).serialize();
+    if ($("#name").val() == '') {
+        var nameMessage = 'Tên danh mục không được để trống!';
+        NclLib.alertMessageBackend('warning', 'Cảnh báo', nameMessage);
+        return false;
+    }
+    if ($("#code_cate").val() == '') {
+        var nameMessage = 'Mã danh mục không được để trống!';
+        NclLib.alertMessageBackend('warning', 'Cảnh báo', nameMessage);
+        return false;
+    }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        success: function (arrResult) {
+            if (arrResult['success'] == true) {
+                  var nameMessage = 'Cập nhật thành công!';
+                  NclLib.alertMessageBackend('success', 'Thông báo', nameMessage);
+                  $('#editmodal').modal('hide');
+                  myClass.loadList(oFormCreate);
+
+            } else {
+                  var nameMessage = arrResult['message'];
+                  NclLib.alertMessageBackend('danger', 'Lỗi', nameMessage);
+            }
         }
     });
 }

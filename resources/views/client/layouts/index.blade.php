@@ -3,14 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>MEDHANOI.COM</title>
+    <title>MEDLATEC CLINIC</title>
     <meta charset="utf-8">
     <base href="{{ asset('') }}">
     @if(request()->isSecure())
     <span></span>
-@else
-<span></span>
-@endif
+    @else
+    <span></span>
+    @endif
+    <meta href="../clients/img/apple-icon.png" itemprop="image">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="../clients/img/apple-icon.png">
     <link rel="icon" href="../clients/img/logo.png" type="image/png">
@@ -25,13 +26,9 @@
     <!-- Load Tempalte CSS -->
     <link rel="stylesheet" href="../clients/css/templatemo.css">
     <link rel="stylesheet" href="../clients/css/chat.css">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../clients/css/custom.css">
     <link rel="stylesheet" href="../assets/chosen/chosen.min.css">
-    <script src="https://unpkg.com/lightweight-charts@3.4.0/dist/lightweight-charts.standalone.production.js"></script>
-    <!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
-    
 </head>
 
 <style>
@@ -149,6 +146,8 @@
     </div>
     @include('client.layouts.menu')
     @yield('body-client')
+     <!-- Bootstrap -->
+     <script src="../clients/js/bootstrap.bundle.min.js"></script>
     <!-- Load jQuery require for isotope -->
     <script src="../clients/js/jquery.min.js"></script>
     <script type="text/javascript" src="{{ URL::asset('assets/js/placeholderTypewriter.js') }}"></script>
@@ -188,6 +187,7 @@
     <!-- Custom -->
     <script src="../clients/js/custom.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script>
+    <script type="text/javascript" src="../assets/ckeditor/ckeditor.js"></script>
     @yield('js')
 </body>
 
