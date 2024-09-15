@@ -57,16 +57,25 @@ class HomeController extends Controller
     public function loadList(Request $request)
     {
         $input = $request->input();
+        $tungay = date('m-d-Y', strtotime($input['tungay']));
+        $denngay = date('m-d-Y', strtotime($input['denngay']));
+        if($input['pid'] == null){
+            $input['pid'] = '';
+        }
+        if($input['tenbn'] == null){
+            $input['tenbn'] = '';
+        }
         $param = [
-            "pid" => "",
-            "tenbn" => "",
-            "matram" => "",
-            "tungay" => "09-09-2024",
-            "denngay" => "11-09-2024",
-            "idkhoathuchien" => "-1",
-            "matram" => "XQ,MRI",
-            "idnhanvien" =>"-1"
+            "pid" => $input['pid'],
+            "tenbn" => $input['tenbn'],
+            "tungay" => $tungay,
+            "denngay" => $denngay,
+            "trangthai" => $input['trangthai'],
+            "idkhoathuchien" => $input['idkhoathuchien'],
+            "matram" => $_SESSION["matram"],
+            "idnhanvien" => '-1'
         ];
+        // dd($param);
         $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/searchchidinh');
         $response = $response->getBody()->getContents();
         $response = json_decode($response,true);
@@ -86,7 +95,29 @@ class HomeController extends Controller
     public function createForm(Request $request)
     {
         $input = $request->all();
-        $data['id'] = $input['id'];
+        $id = 'id='.$input['id'];
+        $id = 'id=816477';
+        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $data = [];
+        if($response['status']['maketqua'] == 'OK'){
+            $data = $response;
+        }
         return view('client.home.changeEdit',$data);
+    }
+       /**
+     * Thêm thông tin người dùng
+     *
+     * @param Request $request
+     *
+     * @return view
+     */
+    public function create (Request $request)
+    {
+        $input = $request->input();
+        dd($input);
+        $create = $this->blogService->store($input,$_FILES); 
+        return array('success' => true, 'message' => 'Cập nhật thành công');
     }
 }

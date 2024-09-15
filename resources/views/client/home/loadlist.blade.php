@@ -57,6 +57,7 @@ div.scrollmenu a:hover {
   }
   .table {
     border-color: #9a9a9a;
+    background-image:none;
   }
 
   .table-responsive.pmd-card.pmd-z-depth {
@@ -97,13 +98,17 @@ div.scrollmenu a:hover {
                     <td align="center" style="vertical-align: middle;"><b>Bác sĩ chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Khoa chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Nguoi trả kq</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>Xem ảnh</b></td>
                 </tr>
             </thead>
             <tbody id="body_data">
                 @if(count($datas) > 0)
                     @foreach ($datas as $key => $data)
                     @php $id = $data['idchidinhct']; $i = 1; @endphp
-                        <tr>
+                        @if($data['status'] == 0) <tr>@endif
+                        @if($data['status'] == 1) <tr style="background:#fcff12">@endif
+                        @if($data['status'] == 2) <tr style="background:#67ff59c7">@endif
+                        @if($data['status'] == 3) <tr style="background:#3ce3d1">@endif
                             <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td>
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['trangthai'] }}</td>
@@ -116,6 +121,10 @@ div.scrollmenu a:hover {
                             <td style="width:15%;vertical-align: middle;">{{ $data['bacsichidinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['tenkhoachidinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['nguoitraketqua'] }}</td>
+                            <td align="center" style="width:15%;vertical-align: middle;">
+                                 <span onclick="JS_Home.openLink('{{$data['pacslink']}}')" style="font-size: 15px;background:#2561a7" class="btn btn-success shadow-sm" 
+                                 type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-eye"></i> <span style="color:#ffffff">Xem</span></span>
+                            </td>
                         </tr> 
                     @endforeach
                 @endif

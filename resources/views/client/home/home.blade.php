@@ -19,23 +19,23 @@
                                         PID
                                     </div>
                                     <div style="width:200px">
-                                        <input style="height: 25px;" id="pid" name="pid" type="text" class="form-control" placeholder="PID tìm kiếm">
+                                        <input style="" id="pid" name="pid" type="text" class="form-control" placeholder="PID tìm kiếm">
                                     </div>
                                  </div>
                                  <div class="col-md-4" style="display:flex">
-                                    <div style="padding-right:5px; padding-top:5px">
+                                    <div style="padding-right:9px; padding-top:5px">
                                        Tên bệnh nhân
                                     </div>
                                     <div style="width:200px">
-                                       <input style="height: 25px;" id="tenbn" name="tenbn" type="text" class="form-control" placeholder="Tên bệnh nhân">
+                                       <input style="" id="tenbn" name="tenbn" type="text" class="form-control" placeholder="Tên bệnh nhân">
                                     </div>
                                  </div>
                                  <div class="col-md-5" style="display:flex">
-                                    <div style="padding-right:5px; padding-top:5px">
+                                    <div style="padding-right:10px; padding-top:5px">
                                        Mã kiểu dịch vụ
                                     </div>
                                     <div style="width:300px">
-                                        <select style="height: 25px;" class="form-control input-sm chzn-select" name="cate"
+                                        <select style="" class="form-control input-sm chzn-select" name="cate"
                                             id="cate">
                                             {{--@foreach($data['cate'] as $item)
                                                 <option value="{{$item['code_cate']}}">{{$item['name']}}</option>
@@ -50,7 +50,7 @@
                                         Từ ngày
                                     </div>
                                     <div style="width:200px">
-                                        <input class="form-control input-sm" style="height: 25px;font-size: 13px;" type="date"id="tungay" name="tungay" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01"max="2030-12-31">
+                                        <input class="form-control input-sm" style="font-size: 16px;" type="date"id="tungay" name="tungay" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01"max="2030-12-31">
                                     </div>
                                  </div>
                                  <div class="col-md-4" style="display:flex">
@@ -58,7 +58,7 @@
                                        Đến ngày
                                     </div>
                                     <div style="width:200px">
-                                        <input class="form-control input-sm" style="height: 25px;font-size: 13px;" type="date"id="denngay" name="denngay" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01" max="2030-12-31">
+                                        <input class="form-control input-sm" style="font-size: 16px;" type="date"id="denngay" name="denngay" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01" max="2030-12-31">
                                     </div>
                                  </div>
                                  <div class="col-md-5" style="display:flex">
@@ -66,11 +66,11 @@
                                        Trạng thái
                                     </div>
                                     <div style="width:300px">
-                                        <select style="height: 25px;" class="form-control input-sm chzn-select" name="cate"
-                                            id="cate">
-                                            {{--@foreach($data['cate'] as $item)
-                                                <option value="{{$item['code_cate']}}">{{$item['name']}}</option>
-                                            @endforeach--}}
+                                        <select style="" class="form-control input-sm chzn-select" name="trangthai"
+                                            id="trangthai">
+                                            @foreach($_SESSION["trangthai"] as $item)
+                                                <option value="{{$item['idtrangthai']}}">{{$item['tentrangthai']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                  </div>
@@ -81,11 +81,11 @@
                                         Nơi thực hiện
                                     </div>
                                     <div style="width:50%">
-                                        <select style="height: 25px;" class="form-control input-sm chzn-select" name="idkhoathuchien"
+                                        <select style="" class="form-control input-sm chzn-select" name="idkhoathuchien"
                                             id="idkhoathuchien">
-                                            {{--@foreach($data['idkhoathuchien'] as $item)
-                                                <option value="{{$item['code_cate']}}">{{$item['name']}}</option>
-                                            @endforeach--}}
+                                            @foreach($_SESSION["khoaphong"] as $item)
+                                                <option value="{{$item['IdKhoa']}}">{{$item['TenKhoa']}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div style="padding-left:20px;padding-right:20px">
@@ -102,6 +102,14 @@
                                     </div>
                                     <div style="padding-right:5px;">
                                         Đã lưu kết quả
+                                    </div>
+
+                                    <div style="padding-left:20px;padding-right:20px">
+                                        <div style="width: 50px;background: #3ce3d1;"> &nbsp;
+                                        </div>
+                                    </div>
+                                    <div style="padding-right:5px;">
+                                        Đã kết quả
                                     </div>
                                  </div>
                             </div>

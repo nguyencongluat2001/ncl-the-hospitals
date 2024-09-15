@@ -50,11 +50,17 @@ class LoginController extends Controller
         if($response['status'] == true){
             $getkhoaphong = $this->getkhoaphong($response['loginModel']['matram']);
             $gettrangthai = $this->gettrangthai();
+            $getthietbi = $this->getthietbi($response['loginModel']['matram']);
+            $getvungkhaosat = $this->getvungkhaosat($response['loginModel']['matram']);
 
             $_SESSION["username"] = $request->username;
             $_SESSION["matram"] = $response['loginModel']['matram'];
             $_SESSION["idnhanvien"] = $response['loginModel']['idnhanvien'];
+            $_SESSION["tennhanvien"] = $response['loginModel']['tennhanvien'];
             $_SESSION["khoaphong"] = $getkhoaphong;
+            $_SESSION["vungkhaosat"] = $getvungkhaosat;
+
+            $_SESSION["thietbi"] = $getthietbi;
             $_SESSION["trangthai"] = $gettrangthai;
 
             return view('client.home.home');
@@ -85,6 +91,30 @@ class LoginController extends Controller
             $trangthai = $response['result'];
         }
         return $trangthai;
+    }
+    public function getthietbi ($matram)
+    {
+        $matram = 'matram='.$matram;
+        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getthietbi?'.$matram.'');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $thietbi = [];
+        if($response['status'] == true){
+            $thietbi = $response['result'];
+        }
+        return $thietbi;
+    }
+    public function getvungkhaosat ($matram)
+    {
+        $matram = 'matram='.$matram;
+        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getvungkhaosat?'.$matram.'');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $vungkhaosat = [];
+        if($response['status'] == true){
+            $vungkhaosat = $response['result'];
+        }
+        return $vungkhaosat;
     }
     public function logout (Request $request)
     {

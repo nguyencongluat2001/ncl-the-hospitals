@@ -18,6 +18,7 @@
     <!-- Load Require CSS -->
     {{-- @yield('css') --}}
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../assets/css/toast.min.css">
 
     <link href="../clients/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font CSS -->
@@ -182,6 +183,7 @@
     <script type="text/jscript" src="../assets/chosen/chosen.min.js"></script>
     <link rel="stylesheet" href="../assets/css/sweetalert2.min.css" />
     <script src="../assets/js/sweetalert2.min.js"></script>
+    <script type="text/jscript" src="../assets/js/toast.min.js"></script>
     <!-- Templatemo -->
     <script src="../clients/js/templatemo.js"></script>
     <!-- Custom -->
