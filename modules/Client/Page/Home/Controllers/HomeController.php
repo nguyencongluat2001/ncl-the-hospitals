@@ -14,6 +14,8 @@ use DB;
 use Modules\System\Dashboard\Hospital\Services\HospitalService;
 use Modules\System\Dashboard\Specialty\Services\SpecialtyService;
 use Modules\System\Dashboard\UrlSearch\Services\UrlSearchService;
+use Modules\Base\PrintDynamic\PrintDynamicFactory;
+
 /**
  * Phân quyền người dùng 
  *
@@ -21,8 +23,14 @@ use Modules\System\Dashboard\UrlSearch\Services\UrlSearchService;
  */
 class HomeController extends Controller
 {
-
+     //Các kiểu in
+     const HTML  = 'html';
+     const WORD  = 'word';
+     const PDF   = 'pdf';
+     const EXCEL = 'excel';
+    private $printDynamicFactory;
     public function __construct(
+        PrintDynamicFactory $printDynamicFactory,
         UrlSearchService $UrlSearchService,
         SpecialtyService $specialtyService,
         CateService $cateService,
@@ -31,6 +39,8 @@ class HomeController extends Controller
         BlogService $blogService,
         HospitalService $hospitalService
     ){
+        $this->baseDis = public_path("export/") . "/";
+        $this->printDynamicFactory      = $printDynamicFactory;
         $this->UrlSearchService = $UrlSearchService;
         $this->specialtyService = $specialtyService;
         $this->cateService = $cateService;
@@ -47,15 +57,19 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $dataSearch = '';
-        $datas['dataSearch'] = '';
-        return view('client.home.home',$datas);
+        if(!isset($_SESSION['idnhanvien'])){
+            return view('auth.signin');
+        }
+        return view('client.home.home');
     }
     /**
      * Danh sách
      */
     public function loadList(Request $request)
     {
+        if(!isset($_SESSION['idnhanvien'])){
+            return view('auth.signin');
+        }
         $input = $request->input();
         $tungay = date('m-d-Y', strtotime($input['tungay']));
         $denngay = date('m-d-Y', strtotime($input['denngay']));
@@ -73,7 +87,7 @@ class HomeController extends Controller
             "trangthai" => $input['trangthai'],
             "idkhoathuchien" => $input['idkhoathuchien'],
             "matram" => $_SESSION["matram"],
-            "idnhanvien" => '-1'
+            "idnhanvien" => $_SESSION['idnhanvien'],
         ];
         // dd($param);
         $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/searchchidinh');
@@ -119,5 +133,27 @@ class HomeController extends Controller
         dd($input);
         $create = $this->blogService->store($input,$_FILES); 
         return array('success' => true, 'message' => 'Cập nhật thành công');
+    }
+     /**
+     * Xuất excel
+     */
+    public function export(Request $request)
+    {
+        $input = $request->all();
+        $input['type'] = 'html';
+        $printType = $input['type'];
+        if($printType == 'html'){
+            $id = 'id='.$input['id'];
+            $id = 'id=816477';
+            $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status']['maketqua'] == 'OK'){
+                $data = $response;
+                $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
+                return view('client.home.viewHtml',$data);
+            }
+        }
     }
 }

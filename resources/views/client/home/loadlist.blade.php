@@ -122,8 +122,8 @@ div.scrollmenu a:hover {
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['tenkhoachidinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['nguoitraketqua'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
-                                 <span onclick="JS_Home.openLink('{{$data['pacslink']}}')" style="font-size: 15px;background:#2561a7" class="btn btn-success shadow-sm" 
-                                 type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-eye"></i> <span style="color:#ffffff">Xem</span></span>
+                                 <span onclick="JS_Home.openLink('{{$data['pacslink']}}')" style="font-size: 15px"
+                                 data-toggle="tooltip"><i style="color:#000000" class="fas fa-eye"></i> <span style="color:#000000">Xem</span></span>
                             </td>
                         </tr> 
                     @endforeach

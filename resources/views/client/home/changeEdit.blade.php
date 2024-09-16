@@ -51,134 +51,127 @@
             <input  style="display:none" id="idbacsidocketqua" name="idbacsidocketqua" type="text" value="{{isset($_SESSION["idnhanvien"])?$_SESSION["idnhanvien"]:''}}" class="form-control">
             <div class="modal-body pt-1">
                 <div class="row form-group" style="padding: 0px 10px 10px 10px;">
-                    <div class="col-md-4" style="border: 1px solid #90a0a5;padding:10px;background:#f3f3ff">
-                        <div style="display:flex">
-                            <div style="padding-right:49px">
-                                ID phiếu
+                    <div class="col-md-5" style="border: 1px solid #90a0a5;padding:10px;">
+                        <!-- <div class="row form-group" id="div_hinhthucgiai">
+                            <span class="col-md-3 control-label required">Mã thể loại</span>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" value="" name="code_category" id="code_category"
+                                    placeholder="Nhập mã thể loại..." />
                             </div>
-                            <div style="padding-right:5px;width:29%">
-                                <input style="" id="idchidinhct" name="idchidinhct" type="text" value="{{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}}" class="form-control">
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">ID phiếu</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}}" name="idchidinhct" id="idchidinhct" placeholder="Chọn ngày sinh..." />
+                                </div>
                             </div>
-                            <div style="padding-right:5px">
-                                Ngày CD
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">Ngày CD</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['ngaychidinh'])?$result[0]['ngaychidinh']:''}}" name="ngaychidinh" id="ngaychidinh" placeholder="Nhập Ngày CD..." />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width:30%">
-                                <input style="" id="ngaychidinh" name="ngaychidinh" type="text" value="{{isset($result[0]['ngaychidinh'])?$result[0]['ngaychidinh']:''}}" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:81px">
-                                PID
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="pid" name="pid" type="text" value="{{isset($result[0]['pid'])?$result[0]['pid']:''}}" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:59px">
-                                Tên BN
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="tenbn" name="tenbn" type="text" value="{{isset($result[0]['tenbn'])?$result[0]['tenbn']:''}}" class="form-control">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">PID</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['pid'])?$result[0]['pid']:''}}" name="pid" id="pid"/>
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:40px">
-                                Đối tượng
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">Tên BN</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['tenbn'])?$result[0]['tenbn']:''}}" name="tenbn" id="tenbn" />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="tendoituong" name="tendoituong" type="text" value="{{isset($result[0]['tendoituong'])?$result[0]['tendoituong']:''}}" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:45px">
-                                Năm sinh
-                            </div>
-                            <div style="padding-right:5px;width:80px">
-                                <input style="" id="namsinh" name="namsinh" type="text" value="{{isset($result[0]['namsinh'])?$result[0]['namsinh']:''}}" class="form-control">
-                            </div>
-                            <div style="padding-right:5px">
-                                Tuổi
-                            </div>
-                            <div style="padding-right:5px;width:80px">
-                                <input style="" id="tuoi" name="tuoi" type="text" value="{{isset($result[0]['tuoi'])?$result[0]['tuoi']:''}}" class="form-control">
-                            </div>
-                            <div style="padding-right:5px">
-                                Giới tính
-                            </div>
-                            <div style="padding-right:5px;width:80px">
-                                <input style="" id="gioitinh" name="gioitinh" type="text" value="{{isset($result[0]['gioitinh'])?$result[0]['gioitinh']:''}}" class="form-control">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">Năm sinh</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['namsinh'])?$result[0]['namsinh']:''}}" name="namsinh" id="namsinh" />
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:61px">
-                                Tên CD
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">Tuổi</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['tuoi'])?$result[0]['tuoi']:''}}" name="tuoi" id="tuoi" />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="tenchidinh" name="tenchidinh" type="text" value="{{isset($result[0]['tenchidinh'])?$result[0]['tenchidinh']:''}}" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:75px">
-                                Khoa
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="ten_khoa" name="ten_khoa" type="text" value="{{isset($result[0]['ten_khoa'])?$result[0]['ten_khoa']:''}}" class="form-control">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Giới tính</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['gioitinh'])?$result[0]['gioitinh']:''}}" name="gioitinh" id="gioitinh" />
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:35px">
-                                Triệu chứng
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required">Đối tượng</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['tendoituong'])?$result[0]['tendoituong']:''}}" name="tendoituong" id="tendoituong" />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="trieuchung" name="trieuchung" type="text" value="{{isset($result[0]['trieuchung'])?$result[0]['trieuchung']:''}}" class="form-control">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Tên CD</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['tenchidinh'])?$result[0]['tenchidinh']:''}}" name="tenchidinh" id="tenchidinh" />
+                                </div>
                             </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:31px">
-                                Chuẩn đoán
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="chandoan" name="chandoan" type="text" value="{{isset($result[0]['chandoan'])?$result[0]['chandoan']:''}}" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:20px">
-                                Bác sĩ chỉ định
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="bacsichidinh" name="bacsichidinh" type="text" value="{{isset( $_SESSION["tennhanvien"])? $_SESSION["tennhanvien"]:''}}" class="form-control">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Khoa</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['ten_khoa'])?$result[0]['ten_khoa']:''}}" name="ten_khoa" id="ten_khoa" />
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:75px">
-                                Lưu ý
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Triệu chứng</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['trieuchung'])?$result[0]['trieuchung']:''}}" name="trieuchung" id="trieuchung" />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="pid" name="pid" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:24px">
-                                Bác sĩ đọc KQ
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="BacSiDocKetQua" name="BacSiDocKetQua" type="text" value="{{isset($result[0]['BacSiDocKetQua'])?$result[0]['BacSiDocKetQua']:''}}" class="form-control">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Chuẩn đoán</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['chandoan'])?$result[0]['chandoan']:''}}" name="chandoan" id="chandoan" />
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:37px">
-                                Ngày duyệt
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
-                                <input style="" id="ngayduyet" name="ngayduyet" type="date" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01"max="2030-12-31" class="form-control">
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                        <span for="example-text-input" class="form-control-label required"> Bác sĩ chỉ định</span>
+                                        <input class="form-control" type="text" value="{{isset( $_SESSION["tennhanvien"])? $_SESSION["tennhanvien"]:''}}" name="bacsichidinh" id="bacsichidinh" />
+                                    </div>
+                                </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Lưu ý</span>
+                                    <input class="form-control" type="text" value="" name="pid" id="pid" />
+                                </div>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:61px">
-                                Thiết bị
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Bác sĩ đọc KQ</span>
+                                    <input class="form-control" type="text" value="{{isset($result[0]['BacSiDocKetQua'])?$result[0]['BacSiDocKetQua']:''}}" name="BacSiDocKetQua" id="BacSiDocKetQua" />
+                                </div>
                             </div>
-                            <div style="padding-right:5px;width: 70%;">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <span for="example-text-input" class="form-control-label required"> Ngày duyệt</span>
+                                    <input class="form-control" type="date" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01"max="2030-12-31" name="ngayduyet" id="ngayduyet" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span for="example-text-input" class="form-control-label required"> Thiết bị</span>
                                 <select style="" class="form-control input-sm chzn-select" name="idthietbi"
                                     id="idthietbi">
                                     @foreach($_SESSION["thietbi"] as $item)
@@ -187,15 +180,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="padding-right:60px">
-                                Ghi chú
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span for="example-text-input" class="form-control-label required"> Ghi chú</span>
                                 <textarea style="height:80px" class="form-control required" placeholder="Ghi chú ..." name="ghichu" id="ghichu" value="{{isset($result[0]['ghichu'])?$result[0]['ghichu']:''}}" rows="4" cols="50"></textarea>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
+                        <div style="display:flex;">
                             <div style="padding-right:10px;font-size: 20px;font-weight: 700;">
                                 Đã duyệt
                             </div>
@@ -211,16 +202,14 @@
                                 <input type="checkbox" name="print_sign" id="print_sign"/>
                             </div>
                         </div>
-                        <div style="display:flex;padding-top:10px">
-                            <div style="width:21%">
-                                Lời dặn bác sĩ chuyên khoa
-                            </div>
-                            <div style="padding-right:5px;width: 70%;">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span for="example-text-input" class="form-control-label required"> Lời dặn bác sĩ chuyên khoa</span>
                                 <textarea style="height:80px" class="form-control required" placeholder="Lời dặn bác sĩ chuyên khoa ..." name="loidanchuyenkhoa" id="loidanchuyenkhoa" value="{{isset($result[0]['loidanchuyenkhoa'])?$result[0]['loidanchuyenkhoa']:''}}" rows="4" cols="50"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8" style="display:flex">
+                    <div class="col-md-7" style="display:flex">
                         <div class="form-group" style="width:100%">
                             <div style="display:flex">
                                 <div style="padding-right:50px">
@@ -239,16 +228,16 @@
                             </div>
                             <br>
                             <span >
-                                <button id='btn_create' style="font-size: 15px;background:#8d8bff" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-book-medical"></i> <span style="color:#ffffff">Lưu lại</span></button>
+                                <button onclick="JS_Home.edit()" style="font-size: 15px;background:#8d8bff" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-book-medical"></i> <span style="color:#ffffff">Lưu lại</span></button>
                             </span>
                             <span>
                                 <button id='btn_examine' style="font-size: 15px;background:#48e120" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> <span style="color:#ffffff">Duyệt kết quả</span></button>
                             </span>
                             <span>
-                                <button id='btn_close' style="font-size: 15px;background:#ffa0a0" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-exclamation"></i> <span style="color:#ffffff">Hủy kết quả</span></button>
+                                <button id='btn_close' style="font-size: 15px;background:#ff3f3f" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-exclamation"></i> <span style="color:#ffffff">Hủy kết quả</span></button>
                             </span>
                             <span>
-                                <button id='btn_close' style="font-size: 15px;background:#ffb300" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> <span style="color:#ffffff">In kết quả</span></button>
+                                <button onclick="JS_Home.export('{{isset($result[0]['id'])?$result[0]['id']:''}}')" style="font-size: 15px;background:#ffb300" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> <span style="color:#ffffff">In kết quả</span></button>
                             </span>
                             <textarea class="form-control" type="text" name="decision" id="decision" placeholder="Nhập nội dung...">{{isset($result[0]['noidunghtml'])?$result[0]['noidunghtml']:''}}</textarea>
                         </div>

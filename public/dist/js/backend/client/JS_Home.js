@@ -53,12 +53,12 @@ JS_Home.prototype.loadIndex = function () {
 }
 JS_Home.prototype.loadevent = function (oForm) {
     var myClass = this;
-    $('form#frmHome_index').find('#btn_update').click(function () {
-        myClass.store('form#frmAdd');
-    })
-    $('form#frmAdd').find('#btn_create').click(function () {
-        myClass.store('form#frmAdd');
-    })
+    // $('form#frmHome_index').find('#btn_update').click(function () {
+    //     myClass.store('form#frmAdd');
+    // })
+    // $('form#frmAdd').find('#btn_create').click(function () {
+    //     myClass.store('form#frmAdd');
+    // })
 }
 /**
  * Load màn hình danh sách
@@ -227,4 +227,41 @@ JS_Home.prototype.store = function (oFormCreate) {
 }
 JS_Home.prototype.openLink = function (link) {
     window.open(link);
+}
+/**
+ * Hàm hiển thị modal edit
+ *
+ * @param oForm (tên form)
+ *
+ * @return void
+ */
+JS_Home.prototype.export = function (id) {
+    NclLib.loadding();
+    var url = this.urlPath + '/export';
+    var myClass = this;
+    var data = '_token=' + $('#frmAdd #_token').val();
+    data += '&id=' + id;
+    $.ajax({
+        url: url,
+        type: "POST",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            $('#export').html(arrResult);
+            $('#export').modal('show');
+            $("#export").css("background","#0c112396");
+            myClass.loadevent('form#frmHome_index');
+        }
+    });
+}
+/**
+ * Hàm hiển thị modal edit
+ *
+ * @param oForm (tên form)
+ *
+ * @return void
+ */
+JS_Home.prototype.close = function () {
+    $('#export').modal('hide');
+    $("#export").css("background","none");
 }
