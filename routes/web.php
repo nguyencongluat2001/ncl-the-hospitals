@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use Modules\Client\Page\Home\Controllers\HomeController;
-
+use App\Http\Controllers\Auth\LoginController;
 Route::get('/system/home', [LoginController::class, 'checkLogin'])->name('checkLogin');
 Route::post('/login/checkLogin_client', [LoginController::class, 'checkLogin_client']);
 Route::get('/system/login', [LoginController::class, 'logout'])->name('fromLogin');
@@ -20,6 +20,7 @@ Route::prefix('/client')->group(function () {
         Route::get('/loadList',[HomeController::class,'loadList']);
         Route::post('/createForm', [HomeController::class,'createForm']);
         Route::post('/export', [HomeController::class,'export']);
+        Route::post('/print', [HomeController::class,'print']);
     });
 });
 

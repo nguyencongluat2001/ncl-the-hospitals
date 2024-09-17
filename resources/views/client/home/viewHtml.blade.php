@@ -30,16 +30,19 @@
     /* .modal-dialog{
         margin:0px !important;
     } */
+     span{
+        font-family: "Times New Roman", Times, serif;
+     }
 </style>
 
 <form id="frmView" role="form" action="" method="POST" enctype="multipart/form-data" >
     @csrf
     <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
     <input type="hidden" name="id" id="id" value="{{isset($result[0]['id'])?$result[0]['id']:''}}">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content card">
             <div class="modal-header" style="padding:4px">
-                <h5 class="modal-title">Phiếu In</h5>
+                <h5 class="modal-title">Xem trươc phiếu In</h5>
                 <!-- <button type="button" class="btn btn-sm" data-bs-dismiss="modal" style="margin-bottom: 0rem !important;background: red;color:white">
                  x
                 </button> -->
@@ -54,10 +57,10 @@
                     </div>
                     <div style="width:70%;padding:10px 0px 0px 10px">
                         <center>
-                            <span style="font-size: 19px;font-weight: 500;">PHÒNG KHÁM ĐA KHOA MEDITEC</span> <br>
-                            <span style="font-size: 19px;font-weight: 500;">TRUNG TÂM CHẨN ĐOÁN HÌNH ẢNH</span><br>
-                            <span style="font-size: 16px;font-weight: 500;">52 Bà Triệu - Hoàn Kiếm - Hà Nội</span><br>
-                            <span style="font-size: 16px;font-weight: 500;">ĐT: 0439325252 - www.meditecclinic.com.vn</span>
+                            <span style="font-size: 19px;font-weight: 600;">PHÒNG KHÁM ĐA KHOA MEDITEC</span> <br>
+                            <span style="font-size: 19px;font-weight: 600;">TRUNG TÂM CHẨN ĐOÁN HÌNH ẢNH</span><br>
+                            <span style="font-size: 16px;font-weight: 600;">52 Bà Triệu - Hoàn Kiếm - Hà Nội</span><br>
+                            <span style="font-size: 16px;font-weight: 600;">ĐT: 0439325252 - www.meditecclinic.com.vn</span>
                         </center>
                     </div>
                 </div>
@@ -105,7 +108,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                
+               <button class="btn btn-sm" style="background:#ededed" data-bs-dismiss="modal" onclick="JS_Home.print()">
+                 Xuất PDF
+                </button>
             </div>
         </div>
     </div>

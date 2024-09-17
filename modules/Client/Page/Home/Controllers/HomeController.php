@@ -15,6 +15,7 @@ use Modules\System\Dashboard\Hospital\Services\HospitalService;
 use Modules\System\Dashboard\Specialty\Services\SpecialtyService;
 use Modules\System\Dashboard\UrlSearch\Services\UrlSearchService;
 use Modules\Base\PrintDynamic\PrintDynamicFactory;
+use PDF;
 
 /**
  * Phân quyền người dùng 
@@ -67,37 +68,44 @@ class HomeController extends Controller
      */
     public function loadList(Request $request)
     {
-        if(!isset($_SESSION['idnhanvien'])){
-            return view('auth.signin');
+        try{
+            if(!isset($_SESSION['idnhanvien'])){
+                return view('auth.signin');
+            }
+            $input = $request->input();
+            $tungay = date('m-d-Y', strtotime($input['tungay']));
+            $denngay = date('m-d-Y', strtotime($input['denngay']));
+            if($input['pid'] == null){
+                $input['pid'] = '';
+            }
+            if($input['tenbn'] == null){
+                $input['tenbn'] = '';
+            }
+            $param = [
+                "pid" => $input['pid'],
+                "tenbn" => $input['tenbn'],
+                "tungay" => $tungay,
+                "denngay" => $denngay,
+                "trangthai" => $input['trangthai'],
+                "idkhoathuchien" => $input['idkhoathuchien'],
+                "matram" => $_SESSION["matram"],
+                "idnhanvien" => $_SESSION['idnhanvien'],
+            ];
+            // dd($param);
+            $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/searchchidinh');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status'] == true){
+                $data['success'] = true;
+                $data['datas'] = $response['result'];
+            }
+            return view('client.home.loadlist', $data)->render();
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
         }
-        $input = $request->input();
-        $tungay = date('m-d-Y', strtotime($input['tungay']));
-        $denngay = date('m-d-Y', strtotime($input['denngay']));
-        if($input['pid'] == null){
-            $input['pid'] = '';
-        }
-        if($input['tenbn'] == null){
-            $input['tenbn'] = '';
-        }
-        $param = [
-            "pid" => $input['pid'],
-            "tenbn" => $input['tenbn'],
-            "tungay" => $tungay,
-            "denngay" => $denngay,
-            "trangthai" => $input['trangthai'],
-            "idkhoathuchien" => $input['idkhoathuchien'],
-            "matram" => $_SESSION["matram"],
-            "idnhanvien" => $_SESSION['idnhanvien'],
-        ];
-        // dd($param);
-        $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/searchchidinh');
-        $response = $response->getBody()->getContents();
-        $response = json_decode($response,true);
-        $data = [];
-        if($response['status'] == true){
-            $data['datas'] = $response['result'];
-        }
-        return view('client.home.loadlist', $data)->render();
+        
     }
        /**
      * Load màn hình them thông tin người dùng
@@ -108,17 +116,22 @@ class HomeController extends Controller
      */
     public function createForm(Request $request)
     {
-        $input = $request->all();
-        $id = 'id='.$input['id'];
-        $id = 'id=816477';
-        $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
-        $response = $response->getBody()->getContents();
-        $response = json_decode($response,true);
-        $data = [];
-        if($response['status']['maketqua'] == 'OK'){
-            $data = $response;
+        try{
+            $input = $request->all();
+            $id = 'id='.$input['id'];
+            $id = 'id=816477';
+            $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status']['maketqua'] == 'OK'){
+                $data = $response;
+            }
+            return view('client.home.changeEdit',$data);
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
         }
-        return view('client.home.changeEdit',$data);
     }
        /**
      * Thêm thông tin người dùng
@@ -139,6 +152,33 @@ class HomeController extends Controller
      */
     public function export(Request $request)
     {
+        try{
+            $input = $request->all();
+            $input['type'] = 'html';
+            $printType = $input['type'];
+            if($printType == 'html'){
+                $id = 'id='.$input['id'];
+                $id = 'id=816477';
+                $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+                $response = $response->getBody()->getContents();
+                $response = json_decode($response,true);
+                $data = [];
+                if($response['status']['maketqua'] == 'OK'){
+                    $data = $response;
+                    $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
+                    return view('client.home.viewHtml',$data);
+                }
+            }
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
+        }
+    }
+     /**
+     * Xuất excel
+     */
+    public function print(Request $request)
+    {
         $input = $request->all();
         $input['type'] = 'html';
         $printType = $input['type'];
@@ -152,7 +192,10 @@ class HomeController extends Controller
             if($response['status']['maketqua'] == 'OK'){
                 $data = $response;
                 $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
-                return view('client.home.viewHtml',$data);
+                // return view('client.home.viewHtml',$data);
+                $pdf = PDF::loadView(view('client.home.viewHtml',$data));
+
+                return $pdf->download('tutsmake.pdf');
             }
         }
     }

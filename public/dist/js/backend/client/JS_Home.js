@@ -107,8 +107,14 @@ JS_Home.prototype.loadList = function (oForm) {
         // cache: true,
         data: data,
         success: function (arrResult) {
-            $("#table-container").html(arrResult);
-            myClass.loadevent(oForm);
+            if (arrResult['success'] == false) {
+                NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
+                return false;
+            } else {
+                $("#table-container").html(arrResult);
+                myClass.loadevent(oForm);
+            }
+            
         }
     });
 }
@@ -154,10 +160,14 @@ JS_Home.prototype.edit = function () {
         //cache: true,
         data: data,
         success: function (arrResult) {
-            $('#editmodal').html(arrResult);
-            // $('.chzn-select').chosen({ height: '100%', width: '100%' });
-            $('#editmodal').modal('show');
-            myClass.loadevent('form#frmHome_index');
+            if (arrResult['success'] == false) {
+                NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
+                return false;
+            } else {
+                $('#editmodal').html(arrResult);
+                $('#editmodal').modal('show');
+                myClass.loadevent('form#frmHome_index');
+            }
         }
     });
 }
@@ -247,9 +257,32 @@ JS_Home.prototype.export = function (id) {
         //cache: true,
         data: data,
         success: function (arrResult) {
-            $('#export').html(arrResult);
-            $('#export').modal('show');
-            $("#export").css("background","#0c112396");
+            console.log(arrResult);
+            if (arrResult['success'] == false) {
+                NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
+                return false;
+            } else {
+                $('#export').html(arrResult);
+                $('#export').modal('show');
+                $("#export").css("background","#0c112396");
+                myClass.loadevent('form#frmHome_index');
+            }
+        }
+    });
+}
+JS_Home.prototype.print = function (id) {
+    NclLib.loadding();
+    var url = this.urlPath + '/print';
+    var myClass = this;
+    var data = '_token=' + $('#frmAdd #_token').val();
+    data += '&id=' + id;
+    $.ajax({
+        url: url,
+        type: "POST",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            $('#export').modal('hide');
             myClass.loadevent('form#frmHome_index');
         }
     });
