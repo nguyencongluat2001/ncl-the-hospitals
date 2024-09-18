@@ -80,7 +80,7 @@
                                     <div style="padding-right:5px; padding-top:5px">
                                         Nơi thực hiện
                                     </div>
-                                    <div style="width:50%">
+                                    <div style="width:35%">
                                         <select style="" class="form-control input-sm chzn-select" name="idkhoathuchien"
                                             id="idkhoathuchien">
                                             @foreach($_SESSION["khoaphong"] as $item)
@@ -88,7 +88,10 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div style="padding-left:20px;padding-right:20px">
+                                    <div style="padding-left:5px">
+                                       <button onclick="JS_Home.loadList()" style="font-size: 10px;background: #6ad6ff;" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="fas fa-search"></i> Tìm kiếm</button>
+                                    </div>
+                                    <div style="padding-left:100px;padding-right:20px">
                                         <div style="width: 50px;background: #fcff12;"> &nbsp;
                                         </div>
                                     </div>
@@ -117,8 +120,8 @@
                                 <div class="breadcrumb-input-right pt-2" style="padding-left:10px">
                                         <button style="font-size: 10px;" class="btn btn-success shadow-sm" id="btn_update" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-plus"></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Nhập kết quả</span>
                                         <button style="font-size: 10px;background: #ff2e2e;" class="btn btn-danger shadow-sm" id="btn_delete" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-exclamation"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Hủy nhập kết quả</span>
-                                        <button style="font-size: 10px;background: #5fe000;" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="fas fa-reply"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Chuyển nơi thực hiện</span>
-                                        <button style="font-size: 10px;" class="btn btn-warning shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="far fa-file-excel"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Xuất Excel</span>
+                                        <!-- <button style="font-size: 10px;background: #5fe000;" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="fas fa-reply"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Chuyển nơi thực hiện</span>
+                                        <button style="font-size: 10px;" class="btn btn-warning shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="far fa-file-excel"></i></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">Xuất Excel</span> -->
                                         <button style="font-size: 10px;background:#a1ebff" class="btn  shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i class="fas fa-print"></i></button> <span style="padding-right: 30px;font-size: 15px;font-weight: 600;">In kết quả (F4)</span>
                                 </div>
                                 <!-- Màn hình danh sách -->

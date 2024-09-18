@@ -14,11 +14,11 @@
 </style>
 <link rel="stylesheet" href="../clients/css/style.css">
 
-<div class="mt-2" style="background-image: url('/clients/img/signin.jpeg');background-size: cover;background-position: center center;">
-    <div style="background:#20364b94;">
+<div class="" style="background-image: url('/clients/img/Banner_medhn.png');background-size: cover;">
+    <div style="">
         <div class="row justify-content-center" style="height:800px; ">
             <div class="col-md-7" style="padding-top:180px;">
-                    <div class="wrapper" style="display: flex; justify-content: center;background: #0d1c2573;border-radius: 15px;margin: 20px;">
+                    <div class="wrapper" style="display: flex; justify-content: center;background: #ffffff;border-radius: 15px;margin: 20px;">
                         <form method="GET" action="{{ route('checkLogin') }}" autocomplete="off" style="padding: 30px;">
                             <input type="hidden" id="_token" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group" align="center">
@@ -28,15 +28,15 @@
                             </div>
                             
                             <div class="form-wrapper row">
-                                <label for="">Tên đăng nhập  <span class="request_star">*</span></label>
+                                <label style="color:#221f1f" for="">Tên đăng nhập  <span class="request_star">*</span></label>
                                 <input  id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" autofocus placeholder="Tên đăng nhập ...">
-                                @if(isset($data['username'])) <span style="color: red">{{$data['username']}}</span> @endif
+                                @if(isset($data['username'])) <span style="color: red;padding-top: 10px;">{{$data['username']}}</span> @endif
                             </div>
                             <div class="form-wrapper row {{!isset($data['password']) ? 'mb-3' : ''}}">
-                                <label for="">Mật khẩu <span class="request_star">*</span></label>
+                                <label style="color:#221f1f" for="">Mật khẩu <span class="request_star">*</span></label>
                                 <input id="password" type="password" class="form-control" name="password" placeholder="Mật khẩu">
                                 @if(isset($data['password'])) <span style="color: red">{{$data['password']}}</span> @endif
-                                @if(isset($data['false'])) <span style="color: red">{{$data['false']}}</span> @endif
+                                @if(isset($data['false'])) <span style="color: red;padding-top: 10px;">{{$data['false']}}</span> @endif
                             </div>
                             <div class="row mb-0">
                                 <div class="col-md-12 mb-3" style="display: flex;justify-content: space-between;">

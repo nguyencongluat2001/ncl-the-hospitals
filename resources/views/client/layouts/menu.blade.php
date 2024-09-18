@@ -11,7 +11,7 @@
         </a>
         <center>
             @if(isset($_SESSION['username']))
-            <div class="navbar">
+            <div class="navbar" style="box-shadow:none">
                 <span style="color: #00a3e0;font-weight: 600;">{{$_SESSION['username']}}</span>
                 <a class="nav-link" href="{{ route('logout') }}"><i style="color:#ffb783" class="fas fa-sign-in-alt fa-1x"></i></a>
             </div>
