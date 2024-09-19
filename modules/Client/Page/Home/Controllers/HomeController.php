@@ -119,7 +119,7 @@ class HomeController extends Controller
         try{
             $input = $request->all();
             $id = 'id='.$input['id'];
-            $id = 'id=816477';
+            // $id = 'id=816477';
             $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
             $response = $response->getBody()->getContents();
             $response = json_decode($response,true);

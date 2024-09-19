@@ -229,7 +229,7 @@
                                 <input type="checkbox" style="width: 30px;height: 20px;" name="status" id="status" {{isset($datas->status) && $datas->status == 1 ? 'checked' : ''}}/>
                             </span>
                             <span>
-                                <span for="example-text-input" style="font-size:20px"  class="form-control-label"> In chữ ký kèm theo</span>
+                                <span for="example-text-input" style="font-size:20px"  class="form-control-label"> In chữ ký</span>
                                 <input type="checkbox" style="width: 30px;height: 20px;" name="print_sign" id="print_sign"/>
                             </span>
                             <textarea class="form-control" type="text" name="decision" id="decision" placeholder="Nhập nội dung...">{{isset($result[0]['noidunghtml'])?$result[0]['noidunghtml']:''}}</textarea>

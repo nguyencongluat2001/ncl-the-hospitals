@@ -171,6 +171,36 @@ JS_Home.prototype.edit = function () {
         }
     });
 }
+/**
+ * Hàm hiển thị modal edit
+ *
+ * @param oForm (tên form)
+ *
+ * @return void
+ */
+JS_Home.prototype.edit_chose = function (p_chk_obj) {
+    NclLib.loadding();
+    var url = this.urlPath + '/createForm';
+    var myClass = this;
+    var data = '_token=' + $('#frmHome_index #_token').val();
+    data += '&id=' + p_chk_obj;
+    $.ajax({
+        url: url,
+        type: "POST",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            if (arrResult['success'] == false) {
+                NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
+                return false;
+            } else {
+                $('#editmodal').html(arrResult);
+                $('#editmodal').modal('show');
+                myClass.loadevent('form#frmHome_index');
+            }
+        }
+    });
+}
 JS_Home.prototype.store = function (oFormCreate) {
     var url = this.urlPath + '/create';
     var myClass = this;

@@ -88,6 +88,7 @@ div.scrollmenu a:hover {
                 <tr>
                     <td align="center" style="vertical-align: middle;"><input type="checkbox" name="chk_all_item_id" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td>
                     <td align="center" style="vertical-align: middle;"><b>STT</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>Nhập</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Trạng thái</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Ngày chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Tên dịch vụ</b></td>
@@ -111,6 +112,10 @@ div.scrollmenu a:hover {
                         @if($data['status'] == 3) <tr style="background:#3ce3d1">@endif
                             <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td>
                             <td align="center">{{ $data['stt'] }}</td>
+                            <td align="center" style="width:15%;vertical-align: middle;">
+                              <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px"
+                            data-toggle="tooltip"><i style="color:#000000" class="fas fa-pen-alt"></i> <span style="color:#000000"></span></span></td>
+
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['trangthai'] }}</td>
                             <td align="center" style="width:10%;vertical-align: middle;">{{ $data['ngaychidinh'] }}</td>
                             <td style="width:40%;vertical-align: middle;">{{ $data['tenchidinh'] }}</td>
