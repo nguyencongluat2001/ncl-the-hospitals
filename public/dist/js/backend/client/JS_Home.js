@@ -328,3 +328,54 @@ JS_Home.prototype.close = function () {
     $('#export').modal('hide');
     $("#export").css("background","none");
 }
+
+// Xoa bài viết
+JS_Home.prototype.huyduyetketqua = function (oForm) {
+    var myClass = this;
+    var data = $(oForm).serialize();
+    var url = this.urlPath + '/delete';
+    Swal.fire({
+        title: 'Bạn có chắc chắn hủy nhập kết quả này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#34bd57',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xác nhận'
+      }).then((result) => {
+        if(result.isConfirmed == true){
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    _token: $('#_token').val(),
+                    listitem: listitem,
+                },
+                success: function (arrResult) {
+                    if (arrResult['success'] == true) {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                position: 'top-start',
+                                icon: 'success',
+                                title: 'Xóa thành công',
+                                showConfirmButton: false,
+                                timer: 3000
+                              })
+                              myClass.loadList(oForm);
+                          }
+                    } else {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                position: 'top-start',
+                                icon: 'error',
+                                title: 'Quá trình xóa đã xảy ra lỗi',
+                                showConfirmButton: false,
+                                timer: 3000
+                              })
+                          }
+                    }
+                }
+            });
+        }
+      })
+}

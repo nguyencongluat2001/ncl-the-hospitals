@@ -212,17 +212,21 @@
                                 </div>
                             </div>
                             <br>
-                            <span >
-                                <button onclick="JS_Home.edit()" style="font-size: 15px;background:#8d8bff" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-book-medical"></i> <span style="color:#ffffff">Lưu lại</span></button>
+                            <span onclick="JS_Home.update()" style="padding-right:50px;font-size: 15px;cursor:pointer"
+                                data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> 
+                                <span style="color:#000000"> Nhập</span>
                             </span>
-                            <span>
-                                <button id='btn_examine' style="font-size: 15px;background:#48e120" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> <span style="color:#ffffff">Duyệt KQ</span></button>
+                            <span onclick="JS_Home.check()" style="padding-right:50px;font-size: 15px;cursor:pointer"
+                                data-toggle="tooltip"><i style="color:#234270" class="fas fa-check"></i> 
+                                <span style="color:#000000"> Duyệt kết quả</span>
                             </span>
-                            <span>
-                                <button id='btn_close' style="font-size: 15px;background:#ff3f3f" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-exclamation"></i> <span style="color:#ffffff">Hủy KQ</span></button>
+                            <span onclick="JS_Home.huyduyetketqua()" style="padding-right:50px;font-size: 15px;cursor:pointer"
+                                data-toggle="tooltip"><i style="color:#234270" class="fas fa-times-circle"></i> 
+                                <span style="color:#000000"> Hủy kết quả</span>
                             </span>
-                            <span>
-                                <button onclick="JS_Home.export('{{isset($result[0]['id'])?$result[0]['id']:''}}')" style="font-size: 15px;background:#ffb300" class="btn btn-success shadow-sm" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> <span style="color:#ffffff">In KQ</span></button>
+                            <span onclick="JS_Home.export('{{isset($result[0]['id'])?$result[0]['id']:''}}')" style="padding-right:50px;font-size: 15px;cursor:pointer"
+                                data-toggle="tooltip"><i style="color:#234270" class="fas fa-print"></i> 
+                                <span style="color:#000000"> In kết quả</span>
                             </span>
                             <span style="padding: 20px;">
                                 <span for="example-text-input" style="font-size:20px" class="form-control-label"> Đã duyệt</span>

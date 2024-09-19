@@ -86,19 +86,21 @@ div.scrollmenu a:hover {
         <table id="table-data" class="table  table-bordered table-striped table-condensed dataTable no-footer" style="">
             <thead>
                 <tr>
-                    <td align="center" style="vertical-align: middle;"><input type="checkbox" name="chk_all_item_id" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td>
+                    <!-- <td align="center" style="vertical-align: middle;"><input type="checkbox" name="chk_all_item_id" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td> -->
                     <td align="center" style="vertical-align: middle;"><b>STT</b></td>
-                    <td align="center" style="vertical-align: middle;"><b>Nhập</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>Nhập KQ</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>Hủy KQ</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>In KQ</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Trạng thái</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Ngày chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Tên dịch vụ</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Tên BN</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Giới tính</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Năm sinh</b></td>
-                    <td align="center" style="vertical-align: middle;"><b>Kết luận</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Bác sĩ chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Khoa chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Nguoi trả kq</b></td>
+                    <td align="center" style="vertical-align: middle;"><b>Ngày trả kq</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Xem ảnh</b></td>
                 </tr>
             </thead>
@@ -110,23 +112,31 @@ div.scrollmenu a:hover {
                         @if($data['status'] == 1) <tr style="background:#fcff12">@endif
                         @if($data['status'] == 2) <tr style="background:#67ff59c7">@endif
                         @if($data['status'] == 3) <tr style="background:#3ce3d1">@endif
-                            <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td>
+                            <!-- <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td> -->
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
-                              <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px"
-                            data-toggle="tooltip"><i style="color:#000000" class="fas fa-pen-alt"></i> <span style="color:#000000"></span></span></td>
-
+                                <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                              data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Nhập</span></span>
+                            </td>
+                            <td align="center" style="width:15%;vertical-align: middle;">
+                                <span onclick="JS_Home.huyduyetketqua('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                              data-toggle="tooltip"><i style="color:#ff0000" class="fas fa-times-circle"></i><span style="color:#000000"> Hủy</span></span>
+                            </td>
+                            <td align="center" style="width:15%;vertical-align: middle;">
+                                <span onclick="JS_Home.print('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                              data-toggle="tooltip"><i style="color:#008be4" class="fas fa-print"></i><span style="color:#000000"> In</span></span>
+                            </td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['trangthai'] }}</td>
                             <td align="center" style="width:10%;vertical-align: middle;">{{ $data['ngaychidinh'] }}</td>
                             <td style="width:40%;vertical-align: middle;">{{ $data['tenchidinh'] }}</td>
                             <td style="width:15%;vertical-align: middle;">{{ $data['tenbn'] }}</td>
                             <td align="center" style="width:10%;vertical-align: middle;">{{ $data['gioitinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['namsinh'] }}</td>
-                            <td align="center" style="width:15%;vertical-align: middle;"></td>
-                            <td style="width:15%;vertical-align: middle;">{{ $data['bacsichidinh'] }}</td>
+                            <td style="width:10%;vertical-align: middle;">{{ $data['bacsichidinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['tenkhoachidinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['nguoitraketqua'] }}</td>
-                            <td align="center" style="width:15%;vertical-align: middle;">
+                            <td align="center" style="width:15%;vertical-align: middle;">{{ $data['ngaytraketqua'] }}</td>
+                            <td align="center" style="width:15%;vertical-align: middle;cursor:pointer">
                                  <span onclick="JS_Home.openLink('{{$data['pacslink']}}')" style="font-size: 15px"
                                  data-toggle="tooltip"><i style="color:#000000" class="fas fa-eye"></i> <span style="color:#000000">Xem</span></span>
                             </td>
