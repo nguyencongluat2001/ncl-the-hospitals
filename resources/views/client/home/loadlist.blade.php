@@ -62,7 +62,7 @@ div.scrollmenu a:hover {
 
   .table-responsive.pmd-card.pmd-z-depth {
     height: 100%;
-    max-height: 600px;
+    max-height: 800px;
   }
 
   #style-1 #table-data thead tr td {
@@ -90,7 +90,7 @@ div.scrollmenu a:hover {
                     <td align="center" style="vertical-align: middle;"><b>STT</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Nhập KQ</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Hủy KQ</b></td>
-                    <td align="center" style="vertical-align: middle;"><b>In KQ</b></td>
+                    <!-- <td align="center" style="vertical-align: middle;"><b>In KQ</b></td> -->
                     <td align="center" style="vertical-align: middle;"><b>Trạng thái</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Ngày chỉ định</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Tên dịch vụ</b></td>
@@ -115,17 +115,29 @@ div.scrollmenu a:hover {
                             <!-- <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td> -->
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
+                               @if($data['status'] != 0 && $data['status'] != 1)
+                                <span style="font-size: 15px;cursor:pointer"
+                                 data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> <span style="color:#cdcdcd"> Nhập</span></span>
+                              @endif
+                              @if($data['status'] == 0 || $data['status'] == 1)
                                 <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
-                              data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Nhập</span></span>
+                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Nhập</span></span>
+                              @endif
                             </td>
                             <td align="center" style="width:15%;vertical-align: middle;">
+                                @if($data['status'] == 0 || $data['status'] == 1)
+                                <span style="font-size: 15px;cursor:pointer"
+                                data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-times-circle"></i><span style="color:#cdcdcd"> Hủy</span></span>
+                                @endif
+                                @if($data['status'] == 3 || $data['status'] == 2)
                                 <span onclick="JS_Home.huyduyetketqua('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
-                              data-toggle="tooltip"><i style="color:#ff0000" class="fas fa-times-circle"></i><span style="color:#000000"> Hủy</span></span>
+                                data-toggle="tooltip"><i style="color:#ff0000" class="fas fa-times-circle"></i><span style="color:#000000"> Hủy</span></span>
+                                @endif
                             </td>
-                            <td align="center" style="width:15%;vertical-align: middle;">
+                            <!-- <td align="center" style="width:15%;vertical-align: middle;">
                                 <span onclick="JS_Home.print('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
                               data-toggle="tooltip"><i style="color:#008be4" class="fas fa-print"></i><span style="color:#000000"> In</span></span>
-                            </td>
+                            </td> -->
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['trangthai'] }}</td>
                             <td align="center" style="width:10%;vertical-align: middle;">{{ $data['ngaychidinh'] }}</td>
                             <td style="width:40%;vertical-align: middle;">{{ $data['tenchidinh'] }}</td>
@@ -133,8 +145,8 @@ div.scrollmenu a:hover {
                             <td align="center" style="width:10%;vertical-align: middle;">{{ $data['gioitinh'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['namsinh'] }}</td>
                             <td style="width:10%;vertical-align: middle;">{{ $data['bacsichidinh'] }}</td>
-                            <td align="center" style="width:15%;vertical-align: middle;">{{ $data['tenkhoachidinh'] }}</td>
-                            <td align="center" style="width:15%;vertical-align: middle;">{{ $data['nguoitraketqua'] }}</td>
+                            <td align="center" style="width:10%;vertical-align: middle;">{{ $data['tenkhoachidinh'] }}</td>
+                            <td align="center" style="width:10%;vertical-align: middle;">{{ $data['nguoitraketqua'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">{{ $data['ngaytraketqua'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;cursor:pointer">
                                  <span onclick="JS_Home.openLink('{{$data['pacslink']}}')" style="font-size: 15px"

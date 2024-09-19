@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>MEDLATEC CLINIC</title>
+    <title>MEDITEC CLINIC</title>
     <meta charset="utf-8">
     <base href="{{ asset('') }}">
     @if(request()->isSecure())

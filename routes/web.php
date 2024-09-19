@@ -19,6 +19,7 @@ Route::prefix('/client')->group(function () {
         Route::get('/index', [HomeController::class, 'index']);
         Route::get('/loadList',[HomeController::class,'loadList']);
         Route::post('/createForm', [HomeController::class,'createForm']);
+        Route::post('/luuchidinh', [HomeController::class,'luuchidinh']);
         Route::post('/export', [HomeController::class,'export']);
         Route::post('/print', [HomeController::class,'print']);
     });

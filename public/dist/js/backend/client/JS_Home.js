@@ -195,14 +195,15 @@ JS_Home.prototype.edit_chose = function (p_chk_obj) {
                 return false;
             } else {
                 $('#editmodal').html(arrResult);
+                $('.chzn-select').chosen({ height: '100%', width: '100%' });
                 $('#editmodal').modal('show');
                 myClass.loadevent('form#frmHome_index');
             }
         }
     });
 }
-JS_Home.prototype.store = function (oFormCreate) {
-    var url = this.urlPath + '/create';
+JS_Home.prototype.luuchidinh = function (oFormCreate) {
+    var url = this.urlPath + '/luuchidinh';
     var myClass = this;
     // if ($("#name").val() == '') {
     //     var nameMessage = 'Tên danh mục không được để trống!';

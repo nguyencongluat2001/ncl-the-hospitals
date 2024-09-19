@@ -140,11 +140,34 @@ class HomeController extends Controller
      *
      * @return view
      */
-    public function create (Request $request)
+    public function luuchidinh (Request $request)
     {
         $input = $request->input();
-        dd($input);
-        $create = $this->blogService->store($input,$_FILES); 
+        $param = [
+            "idchidinhct" => $input['idchidinhct'],
+            "tenchidinh" => $input['tenchidinh'],
+            "idvungkhaosat" => $input['idvungkhaosat'],
+            "denghi" => $input['denghi'],
+            "idthietbi" => $input['idthietbi'],
+            "yeucaudichvu" => $input['yeucaudichvu'],
+            "noidung" => '',
+            "noidunghtml" => $input['noidunghtml'],
+            "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
+            "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
+            "idbacsidocketqua" => $input['idbacsidocketqua'],
+            "ketluan" => $input['ketluan'],
+            "Document_Name" => $input['Document_Name'],
+            "idnhanvien" => $_SESSION['idnhanvien'],
+        ];
+        dd($param );
+        $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/luuchidinh');
+        $response = $response->getBody()->getContents();
+        $response = json_decode($response,true);
+        $data = [];
+        if($response['status'] == true){
+            $data['success'] = true;
+            $data['datas'] = $response['result'];
+        }
         return array('success' => true, 'message' => 'Cập nhật thành công');
     }
      /**
