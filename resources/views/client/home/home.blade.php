@@ -23,14 +23,14 @@
                                     </div>
                                  </div>
                                  <div class="col-md-2" style="display:flex">
-                                    <div style="padding-right:20px; padding-top:5px">
-                                       Tên BN
+                                    <div style="padding-right:44px; padding-top:5px">
+                                       Tên
                                     </div>
                                     <div style="width:200px">
                                        <input style="" id="tenbn" name="tenbn" type="text" class="form-control" placeholder="Tên bệnh nhân">
                                     </div>
                                  </div>
-                                 <div class="col-md-3" style="display:flex">
+                                 <div class="col-md-4" style="display:flex">
                                     <div style="padding-right:55px; padding-top:5px">
                                        Trạng thái
                                     </div>
@@ -46,8 +46,8 @@
                             </div>
                             <div class="row form-group pt-2">
                                  <div class="col-md-2" style="display:flex">
-                                    <div style="padding-right:7px; padding-top:5px">
-                                        Từ ngày
+                                    <div style="padding-right:41px; padding-top:5px">
+                                        Từ
                                     </div>
                                     <div style="width:200px">
                                         <input class="form-control input-sm" style="font-size: 16px;" type="date"id="tungay" name="tungay" value="<?php echo (new DateTime())->format('Y-m-d'); ?>" min="2010-01-01"max="2030-12-31">

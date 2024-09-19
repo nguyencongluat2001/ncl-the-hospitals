@@ -3650,7 +3650,7 @@ textarea.form-control.is-invalid {
   cursor: pointer;
   user-select: none;
   border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
-  border-radius: var(--bs-btn-border-radius);
+  /* border-radius: var(--bs-btn-border-radius); */
   background-color: var(--bs-btn-bg);
   transition: all 0.15s ease-in;
 }
