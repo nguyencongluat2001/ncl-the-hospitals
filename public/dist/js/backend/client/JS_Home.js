@@ -96,14 +96,16 @@ JS_Home.prototype.loadList = function (oForm) {
     var myClass = this;
     var url = this.urlPath + '/loadList';
     var data = '&pid=' + $("#pid").val();
+    data += '&_token=' + $('#frmHome_index #_token').val();
     data += '&tenbn=' + $("#tenbn").val();
     data += '&tungay=' + $("#tungay").val();
     data += '&denngay=' + $("#denngay").val();
     data += '&trangthai=' + $("#trangthai").val();
     data += '&idkhoathuchien=' + $("#idkhoathuchien").val();
+
     $.ajax({
         url: url,
-        type: "GET",
+        type: "POST",
         // cache: true,
         data: data,
         success: function (arrResult) {
@@ -202,23 +204,38 @@ JS_Home.prototype.edit_chose = function (p_chk_obj) {
         }
     });
 }
+/**
+ * Hàm hiển thị modal edit
+ *
+ * @param oForm (tên form)
+ *
+ * @return void
+ */
+JS_Home.prototype.getvungkhaosatbyid = function () {
+    NclLib.loadding();
+    var url = this.urlPath + '/getvungkhaosatbyid';
+    var data = '_token=' + $('#frmHome_index #_token').val();
+    data = '&id=' + $("#idvungkhaosat").val();
+    $.ajax({
+        url: url,
+        type: "GET",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            if (arrResult['success'] == false) {
+                NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
+                return false;
+            } else {
+                // var html = '<textarea class="form-control" type="text" name="decision" id="decision">' + arrResult + '</textarea>';
+                CKEDITOR.instances.decision.setData(arrResult);
+            }
+        }
+    });
+}
 JS_Home.prototype.luuchidinh = function (oFormCreate) {
     var url = this.urlPath + '/luuchidinh';
     var myClass = this;
-    // if ($("#name").val() == '') {
-    //     var nameMessage = 'Tên danh mục không được để trống!';
-    //     NclLib.alertMessageBackend('warning', 'Cảnh báo', nameMessage);
-    //     return false;
-    // }
-    // if ($("#code_cate").val() == '') {
-    //     var nameMessage = 'Mã danh mục không được để trống!';
-    //     NclLib.alertMessageBackend('warning', 'Cảnh báo', nameMessage);
-    //     return false;
-    // }
     var formdata = new FormData();
-    // if(check == false){
-    //     return false;
-    // }
     var status = ''
     $('input[name="status"]:checked').each(function() {
         status =  $(this).val();
@@ -236,15 +253,13 @@ JS_Home.prototype.luuchidinh = function (oFormCreate) {
     formdata.append("ketluan", $("#ketluan").val());
     formdata.append("Document_Name", $("#Document_Name").val());
     formdata.append("noidunghtml", CKEDITOR.instances.decision.getData());
-    // formdata.append("noidung",  CKEDITOR.instances.decision.getBody().getText());
-    // $('form#frmAdd input[type=file]').each(function () {
-    //     var count = $(this)[0].files.length;
-    //     for (var i = 0; i < count; i++) {
-    //         formdata.append('file-attack-' + i, $(this)[0].files[i]);
-    //     }
-    // });
-    console.log(formdata)
-
+    var editorContent = CKEDITOR.instances.decision.getData();
+    // Tạo một thẻ div tạm để loại bỏ thẻ HTML
+    var tempDiv = document.createElement("div");
+    tempDiv.innerHTML = editorContent;
+    // Lấy nội dung chỉ có văn bản
+    var plainText = tempDiv.textContent || tempDiv.innerText || "";
+    formdata.append("noidung",  plainText);
     $.ajax({
         url: url,
         type: "POST",
@@ -288,7 +303,6 @@ JS_Home.prototype.export = function (id) {
         //cache: true,
         data: data,
         success: function (arrResult) {
-            console.log(arrResult);
             if (arrResult['success'] == false) {
                 NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
                 return false;
@@ -303,9 +317,9 @@ JS_Home.prototype.export = function (id) {
 }
 JS_Home.prototype.print = function (id) {
     NclLib.loadding();
-    var url = this.urlPath + '/print';
-    var myClass = this;
+    var url = this.urlPath + '/printViewHtml';
     var data = '_token=' + $('#frmAdd #_token').val();
+    var url_print_download = this.urlPath;
     data += '&id=' + id;
     $.ajax({
         url: url,
@@ -313,7 +327,32 @@ JS_Home.prototype.print = function (id) {
         //cache: true,
         data: data,
         success: function (arrResult) {
-            $('#export').modal('hide');
+            console.log(url_print_download);
+            JS_Home.print_download(id,arrResult,url_print_download);
+        }
+    });
+}
+// function JS_Home(id,arrResult,url_print_download) {
+JS_Home.prototype.print_download = function (id,arrResult,url_print_download) {
+    var url = this.urlPath + '/print';
+    console.log(url_print_download)
+    var data = '_token=' + $('#frmView #_token').val();
+    data += '&id=' + id;
+    data += '&html=' + arrResult;
+    console.log(123,arrResult)
+    $.ajax({
+        url: url,
+        type: "POST",
+        //cache: true,
+        data: data,
+        success: function (arrResult) {
+            if (arrResult['success'] == true) {
+                window.open(arrResult['urlfile']);
+                NclLib.alertMessageBackend('success', 'Thông báo', 'In file PDF thành công');
+                $('#export').modal('hide');
+            }else{
+                NclLib.alertMessageBackend('danger', 'Lỗi', 'In thất bại!');
+            }
             myClass.loadevent('form#frmHome_index');
         }
     });

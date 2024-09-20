@@ -16,12 +16,14 @@ Route::get('/', [HomeController::class, 'index']);
 Route::prefix('/client')->group(function () {
     // Trang chủ client
     Route::prefix('home')->group(function(){
-        Route::get('/index', [HomeController::class, 'index']);
-        Route::get('/loadList',[HomeController::class,'loadList']);
+        Route::post('/index', [HomeController::class, 'index']);
+        Route::post('/loadList',[HomeController::class,'loadList']);
         Route::post('/createForm', [HomeController::class,'createForm']);
         Route::post('/luuchidinh', [HomeController::class,'luuchidinh']);
         Route::post('/export', [HomeController::class,'export']);
+        Route::post('/printViewHtml', [HomeController::class,'printViewHtml']);
         Route::post('/print', [HomeController::class,'print']);
+        Route::get('/getvungkhaosatbyid', [HomeController::class,'getvungkhaosatbyid']);
     });
 });
 

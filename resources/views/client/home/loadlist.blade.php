@@ -115,14 +115,14 @@ div.scrollmenu a:hover {
                             <!-- <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td> -->
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
-                               @if($data['status'] != 0 && $data['status'] != 1)
+                               {{-- @if($data['status'] == 0 && $data['status'] != 1 && $data['status'] != 2)
                                 <span style="font-size: 15px;cursor:pointer"
-                                 data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> <span style="color:#cdcdcd"> Nhập</span></span>
-                              @endif
-                              @if($data['status'] == 0 || $data['status'] == 1)
+                                 data-toggle="tooltip"><i style="color:#b6b6b6" class="fas fa-pen-alt"></i> <span style="color:#b6b6b6"> Nhập</span></span>
+                              @endif --}}
+                              {{-- @if($data['status'] == 0 || $data['status'] == 1 || $data['status'] == 2) --}}
                                 <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
                                  data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Nhập</span></span>
-                              @endif
+                                 {{-- @endif --}}
                             </td>
                             <td align="center" style="width:15%;vertical-align: middle;">
                                 @if($data['status'] == 0 || $data['status'] == 1)

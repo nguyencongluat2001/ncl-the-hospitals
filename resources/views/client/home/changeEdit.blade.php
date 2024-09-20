@@ -47,7 +47,6 @@
                 <i class="fas fa-arrow-left"></i> Thoát
                 </button>
             </div>
-            <input  style="display:none" id="idvungkhaosat" name="idvungkhaosat" type="text" value="{{isset($result[0]['idvungkhaosat'])?$result[0]['idvungkhaosat']:''}}" class="form-control">
             <input  style="display:none" id="denghi" name="denghi" type="text" value="{{isset($result[0]['denghi'])?$result[0]['denghi']:''}}" class="form-control">
             <input  style="display:none" id="yeucaudichvu" name="yeucaudichvu" type="text" value="{{isset($result[0]['yeucaudichvu'])?$result[0]['yeucaudichvu']:''}}" class="form-control">
             <input  style="display:none" id="noidung" name="noidung" type="text" value="{{isset($result[0]['noidung'])?$result[0]['noidung']:''}}" class="form-control">
@@ -181,18 +180,23 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <span for="example-text-input" class="form-control-label "> Ghi chú</span>
-                                <textarea style="height:40px" class="form-control " placeholder="Ghi chú ..." name="ghichu" id="ghichu" value="{{isset($result[0]['ghichu'])?$result[0]['ghichu']:''}}" rows="4" cols="50"></textarea>
-                            </div>
-                        </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span for="example-text-input" class="form-control-label "> Lời dặn bác sĩ chuyên khoa</span>
                                 <textarea style="height:40px" class="form-control " placeholder="Lời dặn bác sĩ chuyên khoa ..." name="loidanchuyenkhoa" id="loidanchuyenkhoa" value="{{isset($result[0]['loidanchuyenkhoa'])?$result[0]['loidanchuyenkhoa']:''}}" rows="4" cols="50"></textarea>
                             </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span for="example-text-input" class="form-control-label "> Đã duyệt</span>
+                                <input type="checkbox" style="width: 15px;height: 15px;" name="status" id="status" {{isset($datas->status) && $datas->status == 1 ? 'checked' : ''}}/>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <span for="example-text-input" class="form-control-label "> In chữ ký</span>
+                                <input type="checkbox" style="width: 15px;height: 15px;" name="print_sign" id="print_sign"/>
+                                </div>
                         </div>
                     </div>
                     <div class="col-md-7" style="display:flex">
@@ -202,7 +206,7 @@
                                     Vùng khảo sát
                                 </div>
                                 <div style="padding-right:5px;width: 80%;">
-                                    <select style="" class="form-control input-sm chzn-select" name="idvungkhaosat"
+                                    <select onchange="JS_Home.getvungkhaosatbyid()" style="" class="form-control input-sm chzn-select" name="idvungkhaosat"
                                         id="idvungkhaosat">
                                         @foreach($_SESSION["vungkhaosat"] as $item)
                                             <option 
@@ -214,26 +218,20 @@
                             </div>
                             <br>
                             <span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">
-                                <button onclick="JS_Home.luuchidinh()" style="font-size: 10px;background:#0c3a55;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-pen-alt"></i> Lưu KQ</button>
+                                <button onclick="JS_Home.luuchidinh()" style="font-size: 14px;background:#0c3a55;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-pen-alt"></i> Lưu KQ</button>
                             </span>
                             <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.check()" style="font-size: 10px;background:#36ac05;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> Duyệt KQ</button>
+                                <button onclick="JS_Home.check()" style="font-size: 14px;background:#36ac05;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> Duyệt KQ</button>
                             </span>
                             <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.huyduyetketqua()" style="font-size: 10px;background:red;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>
+                                <button onclick="JS_Home.huyduyetketqua()" style="font-size: 14px;background:red;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>
                             </span>
                             <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.export()" style="font-size: 10px;background:#ffad25;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
+                                <button onclick="JS_Home.export({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}})" style="font-size: 14px;background:#ffad25;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
                             </span>
-                            <span style="padding: 20px;">
-                                <span for="example-text-input" style="font-size:20px" class="form-control-label"> Đã duyệt</span>
-                                <input type="checkbox" style="width: 20px;height: 20px;" name="status" id="status" {{isset($datas->status) && $datas->status == 1 ? 'checked' : ''}}/>
-                            </span>
-                            <span>
-                                <span for="example-text-input" style="font-size:20px"  class="form-control-label"> In chữ ký</span>
-                                <input type="checkbox" style="width: 20px;height: 20px;" name="print_sign" id="print_sign"/>
-                            </span>
-                            <textarea class="form-control" type="text" name="decision" id="decision" placeholder="Nhập nội dung...">{{isset($result[0]['noidunghtml'])?$result[0]['noidunghtml']:''}}</textarea>
+                            <textarea class="form-control" type="text" name="decision" id="decision">
+                                    {{isset($result[0]['noidunghtml'])?$result[0]['noidunghtml']:''}}
+                            </textarea>
                         </div>
                     </div>
                 </div>
@@ -264,6 +262,6 @@
     CKEDITOR.replace('decision', {
         filebrowserUploadUrl: url,
         filebrowserUploadMethod: 'form',
-        height : 500
+        height : 400
     });
 </script>

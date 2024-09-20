@@ -150,7 +150,7 @@ class HomeController extends Controller
             "denghi" => $input['denghi'],
             "idthietbi" => $input['idthietbi'],
             "yeucaudichvu" => $input['yeucaudichvu'],
-            "noidung" => '',
+            "noidung" => $input['noidung'],
             "noidunghtml" => $input['noidunghtml'],
             "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
             "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
@@ -181,7 +181,7 @@ class HomeController extends Controller
             $printType = $input['type'];
             if($printType == 'html'){
                 $id = 'id='.$input['id'];
-                $id = 'id=816477';
+                // $id = 'id=816477';
                 $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
                 $response = $response->getBody()->getContents();
                 $response = json_decode($response,true);
@@ -200,26 +200,78 @@ class HomeController extends Controller
      /**
      * Xuất excel
      */
-    public function print(Request $request)
+    public function printViewHtml(Request $request)
     {
-        $input = $request->all();
-        $input['type'] = 'html';
-        $printType = $input['type'];
-        if($printType == 'html'){
+        try{
+            $input = $request->all();
+            $input['type'] = 'html';
+            $printType = $input['type'];
+            if($printType == 'html'){
+                $id = 'id='.$input['id'];
+                // $id = 'id=816477';
+                $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+                $response = $response->getBody()->getContents();
+                $response = json_decode($response,true);
+                $data = [];
+                if($response['status']['maketqua'] == 'OK'){
+                    $data = $response;
+                    $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
+                    $replace = ['<html xmlns="http://www.w3.org/1999/xhtml">', '<?xml version="1.0" ?>','</html>'];
+                    $data['result'][0]['noidunghtml'] = str_replace($replace, '', $data['result'][0]['noidunghtml']);
+                    return view('client.home.printViewHtml',$data);
+                }
+                
+            }
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
+        }
+    }
+    
+    
+      /**
+     * Load màn hình them thông tin người dùng
+     *
+     * @param Request $request
+     *
+     * @return view
+     */
+    public function getvungkhaosatbyid(Request $request)
+    {
+        try{
+            $input = $request->all();
             $id = 'id='.$input['id'];
-            $id = 'id=816477';
-            $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getchidinhbyid?'.$id.'');
+            $response = Http::withBody('','application/json')->get('118.70.182.89:89/api/result/getvungkhaosatbyid?'.$id.'');
             $response = $response->getBody()->getContents();
             $response = json_decode($response,true);
             $data = [];
             if($response['status']['maketqua'] == 'OK'){
-                $data = $response;
-                $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
-                // return view('client.home.viewHtml',$data);
-                $pdf = PDF::loadView(view('client.home.viewHtml',$data));
-
-                return $pdf->download('tutsmake.pdf');
+                $data = $response['result'][0]['NoiDung_html'];
             }
+            return $data;
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
         }
+    }
+     /**
+     * Xuất excel
+     */
+    public function print(Request $request)
+    {
+        $input = $request->all();
+        $id = 'id='.$input['id'];
+        // dd($input['html']);
+        $pdf = PDF::loadHTML($input['html']);
+        $random = Library::_get_randon_number();
+        $fileName = 'FILE_KET_QUA.pdf';
+        $fileName = Library::_replaceBadChar($fileName);
+        $fileName = Library::_convertVNtoEN($fileName);
+        $sFullFileName =  $input['id'] . "!~!" . $fileName;
+        $pdf->save($sFullFileName);
+        return array(
+            'success' => true,
+            'message' => 'Xuất thành công', 
+            'urlfile' => url($sFullFileName));
     }
 }
