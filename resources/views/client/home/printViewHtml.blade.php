@@ -1,28 +1,20 @@
-
-
-
-<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Biểu mẫu điện tử</title>
-    <style>
-        body{
-            font-family: "DejaVuSans", serif;
-        }
-    </style>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="http://103.75.186.165:8080/assets/css/toast.min.css">
+    <link href="http://103.75.186.165:8080/assets/css/dashboard.css?v=2.0.4" rel="stylesheet" />
+    <link href="http://103.75.186.165:8080/clients/css/boxicon.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://103.75.186.165:8080/clients/css/templatemo.css">
+    <link rel="stylesheet" href="http://103.75.186.165:8080/clients/css/chat.css">
+    <link rel="stylesheet" href="http://103.75.186.165:8080/clients/css/custom.css">
+    <link rel="stylesheet" href="http://103.75.186.165:8080/assets/chosen/chosen.min.css">
 </head>
-<body>
-<form id="frmView" role="form" action="" method="POST" enctype="multipart/form-data" >
-    @csrf
-    <input type="hidden" name="_token" id="_token" value="{{ csrf_token() }}">
-    <input type="hidden" name="id" id="id" value="{{isset($result[0]['id'])?$result[0]['id']:''}}">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content card">
             <div class="modal-body pt-1">
                 <div style="padding: 0px 10px 10px 10px;display:flex">
                     <div style="width:50%;">
-                        <img style="width:60%;padding:20px 0px 0px 20px" class="card-img " src="../clients/img/logo.png" alt="Card image">
+                        <img style="width:60%;padding:20px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image">
                     </div>
                     <div style="width:50%;padding:10px 0px 0px 10px">
                         <center>
@@ -79,6 +71,11 @@
             </div>
         </div>
     </div>
-</form>
-</body>
+    <script src="http://103.75.186.165:8080/clients/js/jquery.min.js"></script>
+    <script src="http://103.75.186.165:8080/clients/js/bootstrap.bundle.min.js"></script>
+    <script src="http://103.75.186.165:8080/clients/js/jquery.min.js"></script>
+    <script src="http://103.75.186.165:8080/clients/js/templatemo.js"></script>
+    <script src="http://103.75.186.165:8080/clients/js/custom.js"></script>
+    <script src="http://103.75.186.165:8080/assets/js/plugins/chartjs.min.js"></script>
+    <script type="text/javascript" src="http://103.75.186.165:8080/assets/ckeditor/ckeditor.js"></script>
 </html>

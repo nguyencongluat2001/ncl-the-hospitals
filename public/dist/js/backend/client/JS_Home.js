@@ -335,7 +335,6 @@ JS_Home.prototype.print = function (id) {
 // function JS_Home(id,arrResult,url_print_download) {
 JS_Home.prototype.print_download = function (id,arrResult,url_print_download) {
     var url = this.urlPath + '/print';
-    console.log(url_print_download)
     var data = '_token=' + $('#frmView #_token').val();
     data += '&id=' + id;
     data += '&html=' + arrResult;
@@ -353,7 +352,7 @@ JS_Home.prototype.print_download = function (id,arrResult,url_print_download) {
             }else{
                 NclLib.alertMessageBackend('danger', 'Lỗi', 'In thất bại!');
             }
-            myClass.loadevent('form#frmHome_index');
+            // myClass.loadevent('form#frmHome_index');
         }
     });
 }
