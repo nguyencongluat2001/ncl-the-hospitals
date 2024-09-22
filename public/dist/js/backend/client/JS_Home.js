@@ -373,7 +373,7 @@ JS_Home.prototype.huyduyetketqua = function (id,type) {
     var myClass = this;
     var url = this.urlPath + '/huyduyetketqua';
     Swal.fire({
-        title: 'Bạn có chắc chắn hủy nhập kết quả này không?',
+        title: 'Xác nhận hủy nhập kết quả?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#34bd57',
@@ -409,6 +409,9 @@ JS_Home.prototype.huyduyetketqua = function (id,type) {
                         $("#button_change").html(html);
                         var oForm = 'form#frmHome_index';
                         myClass.loadList(oForm);
+                        $("#button_change").html(html);
+                        var checker =   '<input type="checkbox" disabled style="width: 15px;height: 15px;" name="status" id="status"/>'
+                        $("#status").html(checker);
                     }else{
                         NclLib.alertMessageBackend('danger', 'Lỗi', 'Hủy thất bại!');
                     }
@@ -422,7 +425,7 @@ JS_Home.prototype.duyetketqua = function (id) {
     var myClass = this;
     var url = this.urlPath + '/duyetketqua';
     Swal.fire({
-        title: 'Bạn có muốn duyệt kết quả này không?',
+        title: 'Xác nhận duyệt kết quả?',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#34bd57',
@@ -457,6 +460,9 @@ JS_Home.prototype.duyetketqua = function (id) {
                                 html +=   '</span>'
                             html +=   '</div>'
                         $("#button_change").html(html);
+                        var checker =   '<input type="checkbox" disabled style="width: 15px;height: 15px;" name="status" id="status" checked/>'
+                        $("#status").html(checker);
+
                         myClass.loadList(oForm);
                     }else{
                         NclLib.alertMessageBackend('danger', 'Lỗi', 'Duyệt thất bại!');

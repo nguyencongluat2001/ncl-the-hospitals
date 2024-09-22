@@ -197,7 +197,7 @@ class HomeController extends Controller
             if($response['status']['maketqua'] == 'OK'){
                 $data['success'] = true;
                 $data['datas'] = $response['result'];
-                return array('success' => true, 'message' => 'Hủy thành công');
+                return array('success' => true, 'message' => 'Duyệt thành công');
             }else{
                 $data['success'] = false;
                 return $data;

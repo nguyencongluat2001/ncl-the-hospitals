@@ -186,12 +186,12 @@
                                 <textarea style="height:40px" class="form-control " placeholder="Lời dặn bác sĩ chuyên khoa ..." name="loidanchuyenkhoa" id="loidanchuyenkhoa" value="{{isset($result[0]['loidanchuyenkhoa'])?$result[0]['loidanchuyenkhoa']:''}}" rows="4" cols="50"></textarea>
                             </div>
                         </div>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             <div class="form-group">
                                 <span for="example-text-input" class="form-control-label "> Đã duyệt</span>
                                 <input type="checkbox" disabled style="width: 15px;height: 15px;" name="status" id="status" {{$result[0]['da_kqua'] == 3 ? 'checked' : ''}}/>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span for="example-text-input" class="form-control-label "> In chữ ký</span>
