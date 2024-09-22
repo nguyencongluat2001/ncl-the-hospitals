@@ -151,7 +151,7 @@ class HomeController extends Controller
                 "denghi" => $input['denghi'],
                 "idthietbi" => $input['idthietbi'],
                 "yeucaudichvu" => $input['yeucaudichvu'],
-                "noidung" => $input['noi_dung'],
+                "noidung" => $input['noidung'],
                 "noidungrtf" => "",
                 "noidunghtml" => $input['noidung_html'],
                 "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
