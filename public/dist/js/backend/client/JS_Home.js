@@ -271,7 +271,6 @@ JS_Home.prototype.luuchidinh = function (id) {
         success: function (arrResult) {
             if (arrResult['success'] == true) {
                   NclLib.alertMessageBackend('success', 'Thông báo', 'Cập nhật thành công');
-                  $('#editmodal').modal('hide');
                   myClass.loadList(oFormCreate);
 
             } else {
