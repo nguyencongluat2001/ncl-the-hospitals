@@ -153,7 +153,7 @@ class HomeController extends Controller
                 "yeucaudichvu" => $input['yeucaudichvu'],
                 "noidung" => $input['noidung'],
                 "noidungrtf" => "",
-                "noidunghtml" => $input['noidung_html'],
+                "noidunghtml" => $input['noidunghtml'],
                 "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
                 "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
                 "idbacsidocketqua" => $input['idbacsidocketqua'],
