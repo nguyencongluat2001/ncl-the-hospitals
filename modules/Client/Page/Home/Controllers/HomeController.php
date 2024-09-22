@@ -151,8 +151,8 @@ class HomeController extends Controller
                 "denghi" => $input['denghi'],
                 "idthietbi" => $input['idthietbi'],
                 "yeucaudichvu" => $input['yeucaudichvu'],
-                "noi_dung" => $input['noidung'],
-                "noidung_html" => $input['noidunghtml'],
+                "noidungrtf" => $input['noi_dung'],
+                "noidunghtml" => $input['noidung_html'],
                 "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
                 "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
                 "idbacsidocketqua" => $input['idbacsidocketqua'],
@@ -160,6 +160,7 @@ class HomeController extends Controller
                 "Document_Name" => $input['Document_Name'],
                 "idnhanvien" => $_SESSION['idnhanvien'],
             ];
+            // dd($param);
             $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/luuchidinh');
             $response = $response->getBody()->getContents();
             $response = json_decode($response,true);
