@@ -142,33 +142,104 @@ class HomeController extends Controller
      */
     public function luuchidinh (Request $request)
     {
-        $input = $request->input();
-        $param = [
-            "idchidinhct" => $input['idchidinhct'],
-            "tenchidinh" => $input['tenchidinh'],
-            "idvungkhaosat" => $input['idvungkhaosat'],
-            "denghi" => $input['denghi'],
-            "idthietbi" => $input['idthietbi'],
-            "yeucaudichvu" => $input['yeucaudichvu'],
-            "noidung" => $input['noidung'],
-            "noidunghtml" => $input['noidunghtml'],
-            "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
-            "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
-            "idbacsidocketqua" => $input['idbacsidocketqua'],
-            "ketluan" => $input['ketluan'],
-            "Document_Name" => $input['Document_Name'],
-            "idnhanvien" => $_SESSION['idnhanvien'],
-        ];
-        dd($param );
-        $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/luuchidinh');
-        $response = $response->getBody()->getContents();
-        $response = json_decode($response,true);
-        $data = [];
-        if($response['status'] == true){
-            $data['success'] = true;
-            $data['datas'] = $response['result'];
+        try{
+            $input = $request->input();
+            $param = [
+                "idchidinhct" => $input['idchidinhct'],
+                "tenchidinh" => $input['tenchidinh'],
+                "idvungkhaosat" => $input['idvungkhaosat'],
+                "denghi" => $input['denghi'],
+                "idthietbi" => $input['idthietbi'],
+                "yeucaudichvu" => $input['yeucaudichvu'],
+                "noi_dung" => $input['noidung'],
+                "noidung_html" => $input['noidunghtml'],
+                "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
+                "loidanchuyenkhoa" => $input['loidanchuyenkhoa'],
+                "idbacsidocketqua" => $input['idbacsidocketqua'],
+                "ketluan" => $input['ketluan'],
+                "Document_Name" => $input['Document_Name'],
+                "idnhanvien" => $_SESSION['idnhanvien'],
+            ];
+            $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/luuchidinh');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status']['maketqua'] == 'OK'){
+                $data['success'] = true;
+                $data['datas'] = $response['result'];
+            }
+            return array('success' => true, 'message' => 'Cập nhật thành công');
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
         }
-        return array('success' => true, 'message' => 'Cập nhật thành công');
+    }
+      /**
+     * Thêm thông tin người dùng
+     *
+     * @param Request $request
+     *
+     * @return view
+     */
+    public function duyetketqua (Request $request)
+    {
+        try{
+            $input = $request->input();
+            $param = [
+                "idchidinhct" => $input['id'],
+                "dakqua" => 3,
+                "nguoitraketqua" => $_SESSION['idnhanvien'],
+            ];
+            $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/duyetketqua');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status']['maketqua'] == 'OK'){
+                $data['success'] = true;
+                $data['datas'] = $response['result'];
+                return array('success' => true, 'message' => 'Hủy thành công');
+            }else{
+                $data['success'] = false;
+                return $data;
+            }
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
+        }
+    }
+      /**
+     * Thêm thông tin người dùng
+     *
+     * @param Request $request
+     *
+     * @return view
+     */
+    public function huyduyetketqua (Request $request)
+    {
+        try{
+            $input = $request->input();
+            $param = [
+                "idchidinhct" => $input['id'],
+                "dakqua" => 2,
+                "nguoitraketqua" => $_SESSION['idnhanvien'],
+            ];
+            // dd($param);
+            $response = Http::withBody(json_encode($param),'application/json')->post('118.70.182.89:89/api/result/huyduyetketqua');
+            $response = $response->getBody()->getContents();
+            $response = json_decode($response,true);
+            $data = [];
+            if($response['status']['maketqua'] == 'OK'){
+                $data['success'] = true;
+                $data['datas'] = $response['result'];
+                return array('success' => true, 'message' => 'Hủy thành công');
+            }else{
+                $data['success'] = false;
+                return $data;
+            }
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
+        }
     }
      /**
      * Xuất excel

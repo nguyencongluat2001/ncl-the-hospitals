@@ -232,7 +232,7 @@ JS_Home.prototype.getvungkhaosatbyid = function () {
         }
     });
 }
-JS_Home.prototype.luuchidinh = function (oFormCreate) {
+JS_Home.prototype.luuchidinh = function (id) {
     var url = this.urlPath + '/luuchidinh';
     var myClass = this;
     var formdata = new FormData();
@@ -241,7 +241,7 @@ JS_Home.prototype.luuchidinh = function (oFormCreate) {
         status =  $(this).val();
     });
     formdata.append('_token', $("#_token").val());
-    formdata.append("idchidinhct", $("#idchidinhct").val());
+    formdata.append("idchidinhct", id);
     formdata.append("tenchidinh", $("#tenchidinh").val());
     formdata.append("idvungkhaosat", $("#idvungkhaosat").val());
     formdata.append("denghi", $("#denghi").val());
@@ -369,10 +369,9 @@ JS_Home.prototype.close = function () {
 }
 
 // Xoa bài viết
-JS_Home.prototype.huyduyetketqua = function (oForm) {
+JS_Home.prototype.huyduyetketqua = function (id,type) {
     var myClass = this;
-    var data = $(oForm).serialize();
-    var url = this.urlPath + '/delete';
+    var url = this.urlPath + '/huyduyetketqua';
     Swal.fire({
         title: 'Bạn có chắc chắn hủy nhập kết quả này không?',
         icon: 'warning',
@@ -388,30 +387,79 @@ JS_Home.prototype.huyduyetketqua = function (oForm) {
                 dataType: 'json',
                 data: {
                     _token: $('#_token').val(),
-                    listitem: listitem,
+                    id: id,
                 },
                 success: function (arrResult) {
                     if (arrResult['success'] == true) {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                position: 'top-start',
-                                icon: 'success',
-                                title: 'Xóa thành công',
-                                showConfirmButton: false,
-                                timer: 3000
-                              })
-                              myClass.loadList(oForm);
-                          }
-                    } else {
-                        if (result.isConfirmed) {
-                            Swal.fire({
-                                position: 'top-start',
-                                icon: 'error',
-                                title: 'Quá trình xóa đã xảy ra lỗi',
-                                showConfirmButton: false,
-                                timer: 3000
-                              })
-                          }
+                        NclLib.alertMessageBackend('success', 'Thông báo', 'Hủy thành công');
+                        var html =    '<div id="button_change">'
+                            html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                            html +=      '<button onclick="JS_Home.luuchidinh('+id+')" style="font-size: 14px;background:#0c3a55;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-pen-alt"></i> Lưu KQ</button>'
+                            html +=   '</span>'
+                            html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                            html +=      '<button onclick="JS_Home.duyetketqua('+id+')" style="font-size: 14px;background:#36ac05;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> Duyệt KQ</button>'
+                            html +=   '</span>'
+                            html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                            html +=      '<button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>'
+                            html +=   '</span>'
+                            html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                            html +=      '<button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>'
+                            html +=   '</span>'
+                        html +=   '</div>'
+                        $("#button_change").html(html);
+                        var oForm = 'form#frmHome_index';
+                        myClass.loadList(oForm);
+                    }else{
+                        NclLib.alertMessageBackend('danger', 'Lỗi', 'Hủy thất bại!');
+                    }
+                }
+            });
+        }
+      })
+}
+// Xoa bài viết
+JS_Home.prototype.duyetketqua = function (id) {
+    var myClass = this;
+    var url = this.urlPath + '/duyetketqua';
+    Swal.fire({
+        title: 'Bạn có muốn duyệt kết quả này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#34bd57',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Xác nhận'
+      }).then((result) => {
+        if(result.isConfirmed == true){
+            $.ajax({
+                url: url,
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    _token: $('#_token').val(),
+                    id: id,
+                },
+                success: function (arrResult) {
+                    if (arrResult['success'] == true) {
+                        NclLib.alertMessageBackend('success', 'Thông báo', 'Duyệt thành công');
+                        var oForm = 'form#frmHome_index';
+                        var html =    '<div id="button_change">'
+                                html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                                html +=      '<button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> Lưu KQ</button>'
+                                html +=   '</span>'
+                                html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                                html +=      '<button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> Duyệt KQ</button>'
+                                html +=   '</span>'
+                                html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                                html +=      '<button onclick="JS_Home.huyduyetketqua('+id+')" style="font-size: 14px;background:red;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>'
+                                html +=   '</span>'
+                                html +=   '<span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">'
+                                html +=      '<button onclick="JS_Home.export('+id+',2)" style="font-size: 14px;background:#ffad25;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>'
+                                html +=   '</span>'
+                            html +=   '</div>'
+                        $("#button_change").html(html);
+                        myClass.loadList(oForm);
+                    }else{
+                        NclLib.alertMessageBackend('danger', 'Lỗi', 'Duyệt thất bại!');
                     }
                 }
             });

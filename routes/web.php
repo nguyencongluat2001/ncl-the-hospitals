@@ -23,6 +23,8 @@ Route::prefix('/client')->group(function () {
         Route::post('/export', [HomeController::class,'export']);
         Route::post('/printViewHtml', [HomeController::class,'printViewHtml']);
         Route::post('/print', [HomeController::class,'print']);
+        Route::post('/duyetketqua', [HomeController::class,'duyetketqua']);
+        Route::post('/huyduyetketqua', [HomeController::class,'huyduyetketqua']);
         Route::get('/getvungkhaosatbyid', [HomeController::class,'getvungkhaosatbyid']);
     });
 });

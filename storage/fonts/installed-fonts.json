@@ -1,5 +1,11 @@
 {
     "montserrat": {
         "normal": "montserrat_normal_0a82c580487c3ab5fee63e7f9b60f3f3"
+    },
+    "boxicons": {
+        "normal": "boxicons_normal_5b034dc1d52610fd117c5e83710bc81d"
+    },
+    "roboto": {
+        "300": "roboto_300_946532f67a57584be06dd863f541ac7d"
     }
 }

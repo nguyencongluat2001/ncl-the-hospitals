@@ -189,7 +189,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <span for="example-text-input" class="form-control-label "> Đã duyệt</span>
-                                <input type="checkbox" style="width: 15px;height: 15px;" name="status" id="status" {{isset($datas->status) && $datas->status == 1 ? 'checked' : ''}}/>
+                                <input type="checkbox" disabled style="width: 15px;height: 15px;" name="status" id="status" {{$result[0]['da_kqua'] == 3 ? 'checked' : ''}}/>
                             </div>
                         </div>
                         <div class="col-md-12">
@@ -217,18 +217,54 @@
                                 </div>
                             </div>
                             <br>
-                            <span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">
-                                <button onclick="JS_Home.luuchidinh()" style="font-size: 14px;background:#0c3a55;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-pen-alt"></i> Lưu KQ</button>
-                            </span>
-                            <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.check()" style="font-size: 14px;background:#36ac05;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> Duyệt KQ</button>
-                            </span>
-                            <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.huyduyetketqua()" style="font-size: 14px;background:red;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>
-                            </span>
-                            <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
-                                <button onclick="JS_Home.export({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}})" style="font-size: 14px;background:#ffad25;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
-                            </span>
+                            <div id="button_change">
+                                <span>
+                                    @if($result[0]['da_kqua'] == 0 || $result[0]['da_kqua'] == 1 || $result[0]['da_kqua'] == 2)
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">
+                                        <button onclick="JS_Home.luuchidinh({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}})" style="font-size: 14px;background:#0c3a55;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-pen-alt"></i> Lưu KQ</button>
+                                    </span>
+                                    @else
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">
+                                        <button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> Lưu KQ</button>
+                                    </span>
+                                    @endif
+                                </span>
+                               <span>
+                                    @if($result[0]['da_kqua'] == 0 || $result[0]['da_kqua'] == 1 || $result[0]['da_kqua'] == 2)
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button onclick="JS_Home.duyetketqua({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}})" style="font-size: 14px;background:#36ac05;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-check"></i> Duyệt KQ</button>
+                                    </span>
+                                    @else
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer" data-toggle="tooltip">
+                                        <button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-pen-alt"></i> Duyệt KQ</button>
+                                    </span>
+                                    @endif
+                                   
+                               </span>
+                               <span>
+                                    @if($result[0]['da_kqua'] == 3)
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button onclick="JS_Home.huyduyetketqua({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}})" style="font-size: 14px;background:red;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>
+                                    </span>
+                                    @else
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-times-circle"></i> Hủy KQ</button>
+                                    </span>
+                                    @endif
+                               </span>
+                                <span>
+                                    @if($result[0]['da_kqua'] == 3)
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button onclick="JS_Home.export({{isset($result[0]['idchidinhct'])?$result[0]['idchidinhct']:''}},2)" style="font-size: 14px;background:#ffad25;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
+                                    </span>
+                                    @else
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
+                                    </span>
+                                    @endif
+                                </span>
+                            </div>
+                            
                             <textarea class="form-control" type="text" name="decision" id="decision">
                                     {{isset($result[0]['noidunghtml'])?$result[0]['noidunghtml']:''}}
                             </textarea>

@@ -89,6 +89,7 @@ div.scrollmenu a:hover {
                     <!-- <td align="center" style="vertical-align: middle;"><input type="checkbox" name="chk_all_item_id" onclick="checkbox_all_item_id(document.forms[0].chk_item_id);"></td> -->
                     <td align="center" style="vertical-align: middle;"><b>STT</b></td>
                     <td align="center" style="vertical-align: middle;"><b>Nhập KQ</b></td>
+                    <!-- <td align="center" style="vertical-align: middle;"><b>Tiện ích</b></td> -->
                     <td align="center" style="vertical-align: middle;"><b>Hủy KQ</b></td>
                     <!-- <td align="center" style="vertical-align: middle;"><b>In KQ</b></td> -->
                     <td align="center" style="vertical-align: middle;"><b>Trạng thái</b></td>
@@ -115,22 +116,35 @@ div.scrollmenu a:hover {
                             <!-- <td align="center"><input type="checkbox" name="chk_item_id"value="{{ $data['idchidinhct'] }}"></td> -->
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
-                               {{-- @if($data['status'] == 0 && $data['status'] != 1 && $data['status'] != 2)
-                                <span style="font-size: 15px;cursor:pointer"
-                                 data-toggle="tooltip"><i style="color:#b6b6b6" class="fas fa-pen-alt"></i> <span style="color:#b6b6b6"> Nhập</span></span>
-                              @endif --}}
-                              {{-- @if($data['status'] == 0 || $data['status'] == 1 || $data['status'] == 2) --}}
                                 <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
-                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Nhập</span></span>
-                                 {{-- @endif --}}
+                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Chọn CD</span></span>
                             </td>
+                            <!-- <td align="center" style="width:15%;vertical-align: middle;">
+                                 @if( $data['status'] == 0)
+                                <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                                 data-toggle="tooltip"><i style="color:#5dff32" class="fas fa-pen-alt"></i> <span style=""> Chưa TH </span></span>
+                                 @endif
+                                 @if($data['status'] == 1)
+                                <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-save"></i> <span style="color:#000000"> Lưu</span></span>
+                                @endif
+                                @if( $data['status'] == 2)
+                                <span style="font-size: 15px;cursor:pointer"
+                                 data-toggle="tooltip"><i style="color:#5dff32" class="fas fa-check"></i> <span style=""> Đã lưu KQ </span></span>
+                                 @endif
+                                 @if($data['status'] == 3)
+                                <span style="font-size: 15px;cursor:pointer"
+                                 data-toggle="tooltip"><i style="color:#5dff32" class="fas fa-check"></i> <span style=""> Đã KQ </span></span>
+                                 @endif
+                                
+                            </td> -->
                             <td align="center" style="width:15%;vertical-align: middle;">
                                 @if($data['status'] == 0 || $data['status'] == 1)
                                 <span style="font-size: 15px;cursor:pointer"
                                 data-toggle="tooltip"><i style="color:#cdcdcd" class="fas fa-times-circle"></i><span style="color:#cdcdcd"> Hủy</span></span>
                                 @endif
                                 @if($data['status'] == 3 || $data['status'] == 2)
-                                <span onclick="JS_Home.huyduyetketqua('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
+                                <span onclick="JS_Home.huyduyetketqua('{{$data['idchidinhct']}}','1')" style="font-size: 15px;cursor:pointer"
                                 data-toggle="tooltip"><i style="color:#ff0000" class="fas fa-times-circle"></i><span style="color:#000000"> Hủy</span></span>
                                 @endif
                             </td>
