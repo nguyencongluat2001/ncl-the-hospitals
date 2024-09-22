@@ -117,7 +117,7 @@ div.scrollmenu a:hover {
                             <td align="center">{{ $data['stt'] }}</td>
                             <td align="center" style="width:15%;vertical-align: middle;">
                                 <span onclick="JS_Home.edit_chose('{{$data['idchidinhct']}}')" style="font-size: 15px;cursor:pointer"
-                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Chọn CD</span></span>
+                                 data-toggle="tooltip"><i style="color:#234270" class="fas fa-pen-alt"></i> <span style="color:#000000"> Chọn CĐ</span></span>
                             </td>
                             <!-- <td align="center" style="width:15%;vertical-align: middle;">
                                  @if( $data['status'] == 0)
