@@ -245,7 +245,6 @@ JS_Home.prototype.luuchidinh = function (id) {
     formdata.append("tenchidinh", $("#tenchidinh").val());
     formdata.append("idvungkhaosat", $("#idvungkhaosat").val());
     formdata.append("denghi", $("#denghi").val());
-    formdata.append("idthietbi", $("#idthietbi").val());
     formdata.append("yeucaudichvu", $("#yeucaudichvu").val());
     formdata.append("loidanchuyenkhoa", $("#loidanchuyenkhoa").val());
     formdata.append("mauketquabc", $("#mauketquabc").val());
@@ -281,6 +280,7 @@ JS_Home.prototype.luuchidinh = function (id) {
     });
 }
 JS_Home.prototype.openLink = function (link) {
+    console.log(123)
     window.open(link);
 }
 /**

@@ -162,21 +162,10 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-12">
                                 <div class="form-group">
                                     <span for="example-text-input" class="form-control-label "> Lưu ý</span>
                                     <input class="form-control" type="text" value="" name="pid" id="pid" />
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <span for="example-text-input" class="form-control-label"> Thiết bị</span>
-                                    <select style="" class="form-control input-sm chzn-select" name="idthietbi"
-                                        id="idthietbi">
-                                        @foreach($_SESSION["thietbi"] as $item)
-                                            <option value="{{$item['idthietbi']}}">{{$item['tenthietbi']}}</option>
-                                        @endforeach
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -262,6 +251,11 @@
                                         <button style="font-size: 14px;background:#7f8e9626;color:#cdcdcd" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-print"></i> In KQ</button>
                                     </span>
                                     @endif
+                                </span>
+                                <span>
+                                    <span style="padding-right:20px;font-size: 15px;cursor:pointer"data-toggle="tooltip">
+                                        <button onclick="JS_Home.openLink('{{isset($result[0]['pacslink'])?$result[0]['pacslink']:''}}')" style="font-size: 14px;background:#62bddd;color:#ffffff" class="btn btn shadow-sm" id="btn_edit" type="button"data-toggle="tooltip"><i style="color:#ffffff" class="fas fa-eye"></i> Xem</button>
+                                    </span>
                                 </span>
                             </div>
                             

@@ -142,14 +142,13 @@ class HomeController extends Controller
      */
     public function luuchidinh (Request $request)
     {
-        // try{
+        try{
             $input = $request->input();
             $param = [
                 "idchidinhct" => $input['idchidinhct'],
                 "tenchidinh" => $input['tenchidinh'],
                 "idvungkhaosat" => $input['idvungkhaosat'],
                 "denghi" => $input['denghi'],
-                "idthietbi" => $input['idthietbi'],
                 "yeucaudichvu" => $input['yeucaudichvu'],
                 "noidung" => $input['noidung'],
                 "noidungrtf" => "",
@@ -171,10 +170,10 @@ class HomeController extends Controller
                 $data['datas'] = $response['result'];
             }
             return array('success' => true, 'message' => 'Cập nhật thành công');
-        // } catch (\Exception $e) {
-        //     $data['success'] = false;
-        //     return $data;
-        // }
+        } catch (\Exception $e) {
+            $data['success'] = false;
+            return $data;
+        }
     }
       /**
      * Thêm thông tin người dùng
