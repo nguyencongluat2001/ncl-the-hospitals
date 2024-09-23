@@ -16,6 +16,7 @@ use Modules\System\Dashboard\Specialty\Services\SpecialtyService;
 use Modules\System\Dashboard\UrlSearch\Services\UrlSearchService;
 use Modules\Base\PrintDynamic\PrintDynamicFactory;
 use PDF;
+use QrCode;
 
 /**
  * Phân quyền người dùng 
@@ -287,12 +288,16 @@ class HomeController extends Controller
                 $data = [];
                 if($response['status']['maketqua'] == 'OK'){
                     $data = $response;
-                    $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
+                    $explode = explode('/',$data['result'][0]['ngaychidinh']);
+                    $data['result'][0]['ngaychidinh'] = 'Ngày '. $explode[0] . ' Tháng ' . $explode[1] . ' Năm ' . $explode[2];
                     $replace = ['<html xmlns="http://www.w3.org/1999/xhtml">', '<?xml version="1.0" ?>','</html>'];
                     $data['result'][0]['noidunghtml'] = str_replace($replace, '', $data['result'][0]['noidunghtml']);
+                    $data['result'][0]['noidunghtml'] = str_replace('body>', 'div>', $data['result'][0]['noidunghtml']);
+                    $data['result'][0]['noidunghtml'] = str_replace('<body', '<div', $data['result'][0]['noidunghtml']);
+                    $data['result'][0]['QR'] = QrCode::generate($data['result'][0]['QrCode']);
+                    $data['result'][0]['QR'] = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $data['result'][0]['QR']);
                     return view('client.home.printViewHtml',$data);
                 }
-                
             }
         } catch (\Exception $e) {
             $data['success'] = false;
@@ -333,7 +338,6 @@ class HomeController extends Controller
     {
         $input = $request->all();
         $id = 'id='.$input['id'];
-        // dd($input['html']);
         $pdf = PDF::loadHTML($input['html']);
         $random = Library::_get_randon_number();
         $fileName = 'FILE_KET_QUA.pdf';
