@@ -304,7 +304,7 @@ class HomeController extends Controller
         } catch (\Exception $e) {
             $data['success'] = false;
             return $data;
-        }
+        };
     }
     
     
@@ -340,12 +340,14 @@ class HomeController extends Controller
     {
         $input = $request->all();
         $id = 'id='.$input['id'];
+        // dd($input['html']);
+
         $pdf = PDF::loadHTML($input['html']);
         $random = Library::_get_randon_number();
         $fileName = 'FILE_KET_QUA.pdf';
         $fileName = Library::_replaceBadChar($fileName);
         $fileName = Library::_convertVNtoEN($fileName);
-        $sFullFileName =  $input['id'] . "!~!" . $fileName;
+        $sFullFileName =  'file-kq/'.$input['id'] . "!~!" . $fileName;
         $pdf->save($sFullFileName);
         return array(
             'success' => true,

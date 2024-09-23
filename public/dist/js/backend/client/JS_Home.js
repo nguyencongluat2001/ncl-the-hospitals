@@ -226,7 +226,6 @@ JS_Home.prototype.getvungkhaosatbyid = function () {
                 NclLib.alertMessageBackend('warning', 'Cảnh báo', 'Hệ thống mạng đang quá tải, vui lòng thao tác lại!');
                 return false;
             } else {
-                // var html = '<textarea class="form-control" type="text" name="decision" id="decision">' + arrResult + '</textarea>';
                 CKEDITOR.instances.decision.setData(arrResult);
             }
         }
@@ -280,7 +279,6 @@ JS_Home.prototype.luuchidinh = function (id) {
     });
 }
 JS_Home.prototype.openLink = function (link) {
-    console.log(123)
     window.open(link);
 }
 /**
@@ -326,7 +324,6 @@ JS_Home.prototype.print = function (id) {
         //cache: true,
         data: data,
         success: function (arrResult) {
-            console.log(url_print_download);
             JS_Home.print_download(id,arrResult,url_print_download);
         }
     });
@@ -337,7 +334,6 @@ JS_Home.prototype.print_download = function (id,arrResult,url_print_download) {
     var data = '_token=' + $('#frmView #_token').val();
     data += '&id=' + id;
     data += '&html=' + arrResult;
-    console.log(123,arrResult)
     $.ajax({
         url: url,
         type: "POST",
