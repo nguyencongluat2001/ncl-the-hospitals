@@ -262,6 +262,8 @@ class HomeController extends Controller
                 if($response['status']['maketqua'] == 'OK'){
                     $data = $response;
                     $data['result'][0]['ngaychidinh'] = 'Ngày '. date('d',strtotime($data['result'][0]['ngaychidinh'])) . ' Tháng ' . date('m',strtotime($data['result'][0]['ngaychidinh'])). ' Năm ' . date('Y',strtotime($data['result'][0]['ngaychidinh']));
+                    $data['result'][0]['QR'] = QrCode::generate($data['result'][0]['QrCode']);
+                    $data['result'][0]['QR'] = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $data['result'][0]['QR']);
                     return view('client.home.viewHtml',$data);
                 }
             }

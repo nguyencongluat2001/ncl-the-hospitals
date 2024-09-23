@@ -91,6 +91,7 @@
                         <div class="row form-group" style="padding: 0px 50px 10px 50px; display:flex">
                             <div class="col-md-6" style="">
                                 <span><b>Vui lòng quét QR để xem kết quả</b></span> <br>
+                                <span style="padding-left:50px">{!! $result[0]['QR'] !!}</span>
                             </div>
                             <div class="col-md-6" style="">
                                 <center>
