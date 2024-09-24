@@ -340,7 +340,6 @@ class HomeController extends Controller
     {
         $input = $request->all();
         $id = 'id='.$input['id'];
-        // dd($input['html']);
 
         $pdf = PDF::loadHTML($input['html']);
         $random = Library::_get_randon_number();
