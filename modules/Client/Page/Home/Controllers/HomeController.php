@@ -298,7 +298,7 @@ class HomeController extends Controller
                     $data['result'][0]['noidunghtml'] = str_replace('<body', '<div', $data['result'][0]['noidunghtml']);
                     $data['result'][0]['QR'] = QrCode::generate($data['result'][0]['QrCode']);
                     $data['result'][0]['QR'] = str_replace('<?xml version="1.0" encoding="UTF-8"?>', '', $data['result'][0]['QR']);
-                    $data['result'][0]['logo'] = '<img style="width:25%;" class="card-img" src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image">';
+                    // $data['result'][0]['logo'] = '<img style="width:25%;" class="card-img" src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image">';
 
                     return view('client.home.printViewHtml',$data);
                 }

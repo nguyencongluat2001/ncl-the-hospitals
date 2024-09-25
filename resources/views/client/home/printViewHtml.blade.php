@@ -75,7 +75,7 @@
                 </thead>
             </table>
         </div>
-        <div style="padding:10px 60px 0px 40px">
+        <div style="padding:10px 60px 0px 40px;">
         {!! $result[0]['noidunghtml'] !!}
         </div>
         <table>
@@ -88,7 +88,7 @@
                     <td style="width:20%">
                     </td>
                     <td align="center" style="width:40%;padding-left:50px">
-                        <span style="font-weight:bold"> {{$result[0]['ngaychidinh']}} </span> <br>
+                        <span> {{$result[0]['ngaychidinh']}} </span> <br>
                         <span style="font-weight:bold"> Bác sĩ chuyên khoa </span> <br>
                         <span></span> <br>
                         <span style="font-weight:bold"> Đã ký </span> <br>
