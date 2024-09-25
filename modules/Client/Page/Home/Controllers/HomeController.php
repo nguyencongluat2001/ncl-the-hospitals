@@ -348,8 +348,7 @@ class HomeController extends Controller
         $fileName = 'FILE_KET_QUA.pdf';
         $fileName = Library::_replaceBadChar($fileName);
         $fileName = Library::_convertVNtoEN($fileName);
-        // $sFullFileName =  'file-kq/'.$input['id'] . "!~!" . $fileName;
-        $sFullFileName =  $input['id'] . "!~!" . $fileName;
+        $sFullFileName =  'file-kq/'.$input['id'] . "!~!" . $fileName;
         $pdf->save($sFullFileName);
         return array(
             'success' => true,
