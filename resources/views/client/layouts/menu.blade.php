@@ -2,7 +2,7 @@
 <nav id="main_nav" class="navbar navbar-expand-lg navbar-light bg-white " style="top:0;padding-top:0px !important;padding-bottom: 0px !important;background:#00983e!important;width: 100%;z-index: 1000;">
     <div class=" d-flex justify-content-between">
         <div class="image-logo" style="width:10%">
-            <img style="" class="card-img " src="../clients/img/logo.png" alt="Card image">
+            <img style="" class="card-img " src="http://103.75.186.165:8080/logo.png" alt="Card image">
         </div>
         <span>
             <span style="color: #ffffff;font-size: 16px;font-weight: 500;">HỆ THỐNG QUẢN LÝ PHÒNG KHÁM</span>
