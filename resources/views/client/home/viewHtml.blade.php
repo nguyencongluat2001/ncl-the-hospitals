@@ -50,8 +50,6 @@
                 <div class="modal-body pt-1">
                     <div style="padding: 0px 10px 10px 10px;display:flex">
                         <div style="width:50%;">
-                        <!-- <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/clients/img/logo.png'))) }}"> -->
-
                             <img style="width:60%;padding:20px 0px 0px 20px" class="card-img " src="../clients/img/logo.png" alt="Card image">
                         </div>
                         <div style="width:50%;padding:10px 0px 0px 10px">
