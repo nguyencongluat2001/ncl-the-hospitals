@@ -23,8 +23,9 @@
                 <thead>
                     <tr>
                         <td style="vertical-align: middle;width:30%">
-                            <span style="width:50%">
-                            <img style="width:30%;padding:20px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image">
+                            <span>
+                            <img src="clients/img/logo.png" alt="Example Image" width="200">
+                            <!-- <img style="width:30%;padding:20px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image"> -->
                             </span>
                         </td>
                         <td style="width:10%"></td>
