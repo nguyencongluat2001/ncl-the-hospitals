@@ -25,6 +25,7 @@
                         <td style="vertical-align: middle;width:30%">
                             <span>
                             <img src="clients/img/logo.png" alt="Example Image" width="200">
+                            <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('/clients/img/logo.png'))) }}">
                             <!-- <img style="width:30%;padding:20px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/clients/img/logo.png" alt="Card image"> -->
                             </span>
                         </td>
