@@ -50,7 +50,7 @@
                 <div class="modal-body pt-1">
                     <div style="padding: 0px 10px 10px 10px;display:flex">
                         <div style="width:50%;">
-                            <img style="width:40%;padding:0px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/logo.png" alt="Card image">
+                            <img style="width:40%;padding:0px 0px 0px 20px" class="card-img " src="http://103.75.186.165:8080/clients/img/logo.jpg" alt="Card image">
                         </div>
                         <div style="width:50%;padding:10px 0px 0px 10px">
                             <center>
